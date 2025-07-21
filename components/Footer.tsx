@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,11 +11,12 @@ export default function Footer() {
           {/* ロゴとプロフィール */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <img 
+              <Image src="/natomi.png" alt="natomi logo" width={32} height={32} className="h-8 w-8" />
+              {/* <img 
                 src="https://static.readdy.ai/image/a12a4ed85e332a39d4b890d8738d2418/653a65db2e6f34c0a4c63d826bf69bb0.png" 
                 alt="natomi logo" 
                 className="h-8 w-8 mr-2"
-              />
+              /> */}
               <h2 className="text-2xl font-bold text-[#3be7ed]">natomi</h2>
             </div>
             <p className="text-gray-300 mb-4">

@@ -1,5 +1,6 @@
 
 'use client';
+import Image from 'next/image';
 
 interface HeaderProps {
   activeSection: string;
@@ -19,11 +20,8 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="logo flex items-center">
-            <img 
-              src="https://static.readdy.ai/image/a12a4ed85e332a39d4b890d8738d2418/653a65db2e6f34c0a4c63d826bf69bb0.png" 
-              alt="natomi logo" 
-              className="h-8 w-8 mr-2"
-            />
+            <Image src="/natomi.png" alt="logo" width={32} height={32} className="h-8 w-8" />
+
             <h1 className="text-2xl font-bold text-[#3be7ed]">natomi</h1>
           </div>
           
