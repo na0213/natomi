@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
 export default function WorkPage6() {
   return (
     <div className="min-h-screen bg-white">
@@ -23,11 +25,7 @@ export default function WorkPage6() {
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
                   <div className="bg-white rounded h-80 flex items-center justify-center">
-                    <img
-                      src="https://readdy.ai/api/search-image?query=modern%20e-commerce%20website%20desktop%20mockup%2C%20clean%20interface%20design%2C%20professional%20business%20website%2C%20cyan%20color%20scheme%2C%20product%20showcase%20layout%2C%20responsive%20design&width=600&height=400&seq=desktop-mock&orientation=landscape"
-                      alt="Desktop Mockup"
-                      className="w-full h-full object-cover object-top rounded"
-                    />
+                    <Image src="https://readdy.ai/api/search-image?query=modern%20e-commerce%20website%20desktop%20mockup%2C%20clean%20interface%20design%2C%20professional%20business%20website%2C%20cyan%20color%20scheme%2C%20product%20showcase%20layout%2C%20responsive%20design&width=600&height=400&seq=desktop-mock&orientation=landscape" alt="Desktop Mockup" width={600} height={400} className="w-full h-full object-cover object-top rounded"/>
                   </div>
                 </div>
               </div>
@@ -35,11 +33,7 @@ export default function WorkPage6() {
               <div className="mobile-mockup lg:ml-8">
                 <div className="relative bg-gray-900 rounded-2xl p-3 w-60 mx-auto">
                   <div className="bg-white rounded-xl h-96 flex items-center justify-center">
-                    <img
-                      src="https://readdy.ai/api/search-image?query=mobile%20e-commerce%20website%20interface%2C%20responsive%20design%2C%20smartphone%20mockup%2C%20modern%20UI%20design%2C%20cyan%20accents%2C%20clean%20layout%2C%20professional%20mobile%20app&width=300&height=500&seq=mobile-mock&orientation=portrait"
-                      alt="Mobile Mockup"
-                      className="w-full h-full object-cover object-top rounded-xl"
-                    />
+                    <Image src="https://readdy.ai/api/search-image?query=mobile%20e-commerce%20website%20interface%2C%20responsive%20design%2C%20smartphone%20mockup%2C%20modern%20UI%20design%2C%20cyan%20accents%2C%20clean%20layout%2C%20professional%20mobile%20app&width=300&height=500&seq=mobile-mock&orientation=portrait" alt="Mobile Mockup" width={300} height={500} className="w-full h-full object-cover object-top rounded-xl"/>
                   </div>
                 </div>
               </div>
