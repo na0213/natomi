@@ -70,7 +70,7 @@ export default function WorkPage1() {
                     </a>
                   </div>
                   <div className="border-l-4 border-[#3be7ed] pl-4">
-                    <h3 className="font-medium text-[#333] mb-1">Sophie's Developer Site</h3>
+                    <h3 className="font-medium text-[#333] mb-1">Sophies Developer Site</h3>
                     <p className="text-gray-600 text-sm mb-2">クリーンなレイアウトと詳細なプロジェクトケーススタディ</p>
                     <a href="https://example.com/sophie" className="text-[#3be7ed] hover:text-[#2dd4da] text-sm inline-flex items-center">
                       サイトを見る
