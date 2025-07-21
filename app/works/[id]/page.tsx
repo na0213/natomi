@@ -1,16 +1,12 @@
 
-export async function generateStaticParams() {
-  return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
-    { id: '5' },
-    { id: '6' },
-  ];
+interface WorkDetailPageProps {
+  params: {
+    id: string;
+  };
 }
 
-export default function WorkDetailPage({ params }: { params: { id: string } }) {
+export default function WorkDetailPage({ params }: WorkDetailPageProps) {
+  const { id } = params;
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-8">
