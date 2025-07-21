@@ -55,31 +55,51 @@ export default function AboutSection() {
   const timelineItems = [
     {
       side: 'left',
-      period: '2022年〜現在',
-      title: '職歴',
-      role: 'ラグビー協会 事務',
-      description: 'ラグビー協会での事務業務全般を担当'
-    },
-    {
-      side: 'right',
-      period: '2021年',
-      title: '職歴',
-      role: 'フリーランス ライター',
-      description: 'Webメディアでの記事執筆、コンテンツ制作'
+      period: '2025年〜',
+      role: 'ライター',
+      description: 'Webメディア、広報ライター'
     },
     {
       side: 'left',
-      period: '2015年〜2017年',
-      title: '学歴',
-      school: '○○大学 大学院（生物学専攻）',
-      description: '分子生物学分野での研究活動'
+      period: '〜2025年',
+      role: 'コミュニティマネージャー',
+      description: '地域バイヤープログラムのコミュマネとして受講生とのコミュニケーションを担当'
     },
     {
       side: 'right',
-      period: '2011年〜2015年',
-      title: '学歴',
-      school: '○○大学 生物学部',
-      description: '生物学部での基礎学習'
+      period: '2024年',
+      role: 'インタビューライター養成講座',
+      description: '（株）WHEREの講座。地域密着の取材執筆を行う'
+    },
+    {
+      side: 'right',
+      period: '2024年',
+      school: '地域バイヤープログラム',
+      description: '（株）WHEREの講座。地域の生産者を訪問し、仕入れ、AKOMEYA TOKYOにてPOPUP販売'
+    },
+    {
+      side: 'right',
+      period: '2023年〜2024年',
+      school: 'G\'s Devコース',
+      description: 'HTML/CSS/PHP/Laravelのほか、Next.js/Reactを学ぶ。'
+    },
+    {
+      side: 'right',
+      period: '2022年〜2022年',
+      school: 'SAMURAI ENGINEER エキスパートコース',
+      description: 'HTML/CSS/PHP/Laravelを学ぶ。'
+    },
+    {
+      side: 'left',
+      period: '2017年〜2024年',
+      school: '化粧品・健康食品メーカー',
+      description: '物流・品質管理業務。製品の品質向上に貢献'
+    },
+    {
+      side: 'right',
+      period: '〜2008年',
+      school: '生物資源科学修士',
+      description: '遺伝学。鯨類胎盤の女性ホルモンについて解析。'
     }
   ];
 
@@ -88,9 +108,50 @@ export default function AboutSection() {
       <div className="container mx-auto px-4">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
           <h2 className="text-3xl font-bold text-center mb-16 text-[#333]">About</h2>
-          
+
+          {/* プロフィールセクション */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <div className="bg-white p-8 rounded-lg shadow-sm">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <div className="flex-shrink-0">
+                  <img 
+                    src="/natomi.png"
+                    alt="プロフィール写真"
+                    className="w-32 h-32 rounded-full object-cover object-top border-4 border-[#3be7ed]"
+                  />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-[#333] mb-4">N a t o m i</h3>
+                  <div className="space-y-4 text-gray-700">
+                    <p>
+                      大学では生物学を専攻し、大学病院での研究補助、化粧品・健康食品メーカーでの物流・品質管理業務に従事してきました。
+                      プログラミングを学び、個人開発を楽しむ傍ら、フリーランスライターとして取り組んでいます。
+                    </p>
+                    <p>
+                      新しい技術を学ぶことが好きで、ユーザーにとって使いやすく、
+                      価値のあるWebサービスを作ることを目指しています。
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
+                      <span className="px-3 py-1 bg-[#3be7ed] text-white text-sm rounded-full">ライティング</span>
+                      <span className="px-3 py-1 bg-[#3be7ed] text-white text-sm rounded-full">開発</span>
+                      <span className="px-3 py-1 bg-[#3be7ed] text-white text-sm rounded-full">生成AI</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 職歴・学歴タイムライン */}
           <div className="max-w-6xl mx-auto">
             <div className="relative">
+              <div className="hidden md:flex w-full mb-8">
+                <div className="w-1/2 flex justify-center">
+                  <h3 className="text-xl font-bold text-[#333]">Work Experience</h3>
+                </div>
+                <div className="w-1/2 flex justify-center">
+                  <h3 className="text-xl font-bold text-[#333]">Education</h3>
+                </div>
+              </div>
               {/* 背景の線（グレー） */}
               <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-300 hidden md:block"></div>
 
@@ -115,7 +176,6 @@ export default function AboutSection() {
                       } hidden md:block`}></div>
                       
                       <div className="text-sm text-[#3be7ed] font-medium mb-2">{item.period}</div>
-                      <div className="text-xs text-gray-500 mb-1">{item.title}</div>
                       <h4 className="text-lg font-semibold text-[#333] mb-2">
                         {item.role || item.school}
                       </h4>

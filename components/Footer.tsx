@@ -4,7 +4,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-[#e6fafa] text-gray-800 py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* ロゴとプロフィール */}
@@ -26,9 +26,16 @@ export default function Footer() {
               <a href="#" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
                 <i className="ri-twitter-line text-xl"></i>
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
-                <i className="ri-linkedin-line text-xl"></i>
+              <a href="https://note.com/あなたのユーザー名" className="group">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  className="w-6 h-7 fill-gray-400 group-hover:fill-[#3be7ed] transition-colors"
+                >
+                  <path d="m139.57,142.06c41.19,0,97.6-2.09,138.1-1.04,54.34,1.39,74.76,25.06,75.45,83.53.69,33.06,0,127.73,0,127.73h-58.79c0-82.83.35-96.5,0-122.6-.69-22.97-7.25-33.92-24.9-36.01-18.69-2.09-71.07-.35-71.07-.35v158.96h-58.79v-210.22Z" />
+                </svg>
               </a>
+
               <a href="#" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
                 <i className="ri-github-line text-xl"></i>
               </a>

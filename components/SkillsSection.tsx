@@ -5,50 +5,50 @@ import { useState } from 'react';
 export default function SkillsSection() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
-  const skills = [
-    {
-      id: 'php',
-      name: 'PHP',
-      icon: 'ri-code-s-slash-line',
-      level: 'Intermediate',
-      description: 'Webアプリケーション開発、フレームワーク（Laravel）を使用したプロジェクト経験'
-    },
-    {
-      id: 'writing',
-      name: 'ライティング',
-      icon: 'ri-pencil-line',
-      level: 'Advanced',
-      description: 'SEO記事、コンテンツマーケティング、技術記事の執筆経験が豊富'
-    },
-    {
-      id: 'excel',
-      name: 'Excel',
-      icon: 'ri-file-excel-2-line',
-      level: 'Advanced',
-      description: 'データ分析、VBAを使用した業務効率化、複雑な関数の活用'
-    },
-    {
-      id: 'research',
-      name: 'リサーチ',
-      icon: 'ri-search-line',
-      level: 'Expert',
-      description: '学術研究経験を活かした情報収集・分析能力'
-    },
-    {
-      id: 'communication',
-      name: 'コミュニケーション',
-      icon: 'ri-chat-3-line',
-      level: 'Advanced',
-      description: '顧客対応、チームワーク、プレゼンテーション能力'
-    },
-    {
-      id: 'dataanalysis',
-      name: 'データ分析',
-      icon: 'ri-bar-chart-line',
-      level: 'Intermediate',
-      description: '統計解析、データ可視化、レポート作成'
-    }
-  ];
+const skills = [
+  {
+    id: 'htmlcss',
+    name: 'HTML/CSS',
+    icon: 'ri-html5-line',
+    level: 'Advanced',
+    description: 'レスポンシブデザインやアニメーションを含むUI実装が可能'
+  },
+  {
+    id: 'php',
+    name: 'PHP（Laravel）',
+    icon: 'ri-code-s-slash-line',
+    level: 'Intermediate',
+    description: 'Laravelを使ったWebアプリケーション開発の実務経験'
+  },
+  {
+    id: 'javascript',
+    name: 'JavaScript',
+    icon: 'ri-javascript-line',
+    level: 'Intermediate',
+    description: 'DOM操作や非同期処理を含むクライアントサイド開発が可能'
+  },
+  {
+    id: 'reactnext',
+    name: 'React / Next.js',
+    icon: 'ri-reactjs-line',
+    level: 'Intermediate',
+    description: 'コンポーネント設計やAPI連携を含むフロントエンド開発経験'
+  },
+  {
+    id: 'writing',
+    name: 'ライティング',
+    icon: 'ri-pencil-line',
+    level: 'Advanced',
+    description: 'インタビュー記事や広報コンテンツの執筆に対応'
+  },
+  {
+    id: 'genai',
+    name: '生成AI活用（パスポート取得）',
+    icon: 'ri-robot-2-line',
+    level: 'Intermediate',
+    description: '生成AIを活用したWeb制作・文章生成・動画制作が可能'
+  }
+];
 
   const getLevelColor = (level: string) => {
     switch (level) {
