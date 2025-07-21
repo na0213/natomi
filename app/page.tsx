@@ -7,6 +7,7 @@ import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import WorksSection from '@/components/WorksSection';
 import ContactSection from '@/components/ContactSection';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('about');
@@ -55,6 +56,8 @@ export default function Home() {
         <WorksSection />
         <ContactSection />
       </main>
+            
+      <Footer />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [lineHeight, setLineHeight] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -22,6 +23,33 @@ export default function AboutSection() {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+    useEffect(() => {
+    const handleScroll = () => {
+      const aboutSection = document.getElementById('about');
+      if (!aboutSection) return;
+
+      const sectionTop = aboutSection.offsetTop;
+      const sectionHeight = aboutSection.offsetHeight;
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // セクションが表示範囲に入ったときの計算
+      const sectionStart = sectionTop - windowHeight;
+      const sectionEnd = sectionTop + sectionHeight;
+
+      if (scrollPosition >= sectionStart && scrollPosition <= sectionEnd) {
+        // セクション内でのスクロール進行率を計算
+        const progress = Math.min(Math.max((scrollPosition - sectionStart) / (sectionEnd - sectionStart), 0), 1);
+        setLineHeight(progress * 100);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // 初期値を設定
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const timelineItems = [
@@ -63,7 +91,14 @@ export default function AboutSection() {
           
           <div className="max-w-6xl mx-auto">
             <div className="relative">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-[#3be7ed] hidden md:block"></div>
+              {/* 背景の線（グレー） */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-300 hidden md:block"></div>
+
+              {/* アニメーションの線（青） */}              
+              <div 
+                className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-[#3be7ed] hidden md:block transition-all duration-300 ease-out"
+                style={{ height: `${lineHeight}%` }}
+              ></div>
               
               <div className="space-y-8">
                 {timelineItems.map((item, index) => (

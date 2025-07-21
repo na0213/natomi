@@ -1,4 +1,7 @@
+
 'use client';
+
+import Link from 'next/link';
 
 export default function WorksSection() {
   const works = [
@@ -66,9 +69,10 @@ export default function WorksSection() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {works.map((work) => (
-              <div
+              <Link
                 key={work.id}
-                className="work-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+                href={`/works/${work.id}`}
+                className="work-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
               >
                 <div className="relative overflow-hidden">
                   <img
@@ -99,13 +103,13 @@ export default function WorksSection() {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <button className="text-[#3be7ed] hover:text-[#2dd4da] text-sm font-medium flex items-center whitespace-nowrap">
+                    <div className="text-[#3be7ed] hover:text-[#2dd4da] text-sm font-medium flex items-center whitespace-nowrap">
                       詳細を見る
                       <i className="ri-arrow-right-line ml-1"></i>
-                    </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
