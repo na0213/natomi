@@ -24,7 +24,7 @@ export default function TopSection() {
       setAnimationComplete(true);
     }
     return () => clearTimeout(timer);
-  }, [revealRightCount, revealLeftCount, animationComplete]);
+  }, [revealRightCount, revealLeftCount, animationComplete, rightLen, leftLen]);
 
   const rows = Array.from({ length: rightLen });
 

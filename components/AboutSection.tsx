@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -69,13 +70,13 @@ export default function AboutSection() {
       side: 'right',
       period: '2024年',
       role: 'インタビューライター養成講座',
-      description: '（株）WHEREの講座。地域密着の取材執筆を行う'
+      description: '株式会社WHEREの講座。地域密着の取材執筆を行う'
     },
     {
       side: 'right',
       period: '2024年',
       school: '地域バイヤープログラム',
-      description: '（株）WHEREの講座。地域の生産者を訪問し、仕入れ、AKOMEYA TOKYOにてPOPUP販売'
+      description: '株式会社WHEREの講座。地域の生産者を訪問し、仕入れ、AKOMEYA TOKYOにてPOPUP販売'
     },
     {
       side: 'right',
@@ -114,6 +115,7 @@ export default function AboutSection() {
             <div className="bg-white p-8 rounded-lg shadow-sm">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                 <div className="flex-shrink-0">
+                  <Image src="/natomi.png" alt="プロフィール写真" width={128} height={128} className="rounded-full object-cover object-top border-4 border-[#3be7ed]"/>
                   <img 
                     src="/natomi.png"
                     alt="プロフィール写真"

@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function WorksSection() {
   const works = [
@@ -69,11 +70,7 @@ export default function WorksSection() {
                 className="work-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
               >
                 <div className="relative overflow-hidden">
-                  <img
-                    src={work.thumbnail}
-                    alt={work.title}
-                    className="w-full h-48 object-cover object-top"
-                  />
+                  <Image src={work.thumbnail} alt={work.title} width={400} height={250} className="w-full h-48 object-cover object-top"/>
                   <div className="absolute top-4 left-4">
                     <span className="bg-[#3be7ed] text-white px-3 py-1 rounded-full text-xs font-medium">
                       {work.category}
