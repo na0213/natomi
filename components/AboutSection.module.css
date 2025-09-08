@@ -1,10 +1,22 @@
-/* app/components/AboutSection.module.css */
+/* 角からポップイン */
 @keyframes popInFromCorner {
-  0%   { transform: translate(-30%, -30%) scale(0.7) rotate(-10deg); opacity: 0; filter: blur(3px); }
-  60%  { transform: translate(-8%, -8%)   scale(1.05) rotate(-2deg);  opacity: 1; filter: blur(0); }
-  100% { transform: translate(0, 0)       scale(1)    rotate(0deg);   opacity: 1; }
+  0% {
+    transform: translate(-30%, -30%) scale(0.7) rotate(-10deg);
+    opacity: 0;
+    filter: blur(3px);
+  }
+  60% {
+    transform: translate(-8%, -8%) scale(1.05) rotate(-2deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
+/* 左右にふわふわ揺れる */
 @keyframes swayX {
   0%   { transform: translateX(-6px) rotate(-1.2deg); }
   50%  { transform: translateX(6px)  rotate(1.2deg); }
