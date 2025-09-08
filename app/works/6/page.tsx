@@ -11,7 +11,7 @@ export default function WorkPage6() {
               <i className="ri-arrow-left-line mr-2"></i>
               戻る
             </Link>
-            <h1 className="text-3xl font-bold text-[#333] mb-2">個人開発 Webサイト</h1>
+            <h1 className="text-3xl font-bold text-[#333] mb-2">ウェルフェアFARM</h1>
             <p className="text-gray-600">中小企業向けECサイト開発プロジェクト</p>
           </div>
 

@@ -5,30 +5,25 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#e6fafa] text-gray-800 py-12">
+    <footer className="bg-[#e6e6e6] text-gray-800 py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* ロゴとプロフィール */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
               <Image src="/natomi.png" alt="natomi logo" width={32} height={32} className="h-8 w-8" />
-              {/* <img 
-                src="https://static.readdy.ai/image/a12a4ed85e332a39d4b890d8738d2418/653a65db2e6f34c0a4c63d826bf69bb0.png" 
-                alt="natomi logo" 
-                className="h-8 w-8 mr-2"
-              /> */}
-              <h2 className="text-2xl font-bold text-[#3be7ed]">natomi</h2>
+              <h2 className="text-2xl font-bold text-[#3be7ed] ms-2"></h2>
             </div>
-            <p className="text-gray-300 mb-4">
-              生物学の知識を活かしたライティングと、<br />
-              ラグビー協会での経験を通じて培った<br />
+            <p className="text-[#696969] mb-4">
+              生成AIをつかったWEB構築を日々楽しんでいます。<br />
+              インタビューライターで培った<br />
               コミュニケーション力でお手伝いします。
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
+              <a href="https://x.com/natsugoro___" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
                 <i className="ri-twitter-line text-xl"></i>
               </a>
-              <a href="https://note.com/あなたのユーザー名" className="group">
+              <a href="https://note.com/natsugoro___" className="group">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -38,11 +33,8 @@ export default function Footer() {
                 </svg>
               </a>
 
-              <a href="#" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
+              <a href="https://github.com/na0213" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
                 <i className="ri-github-line text-xl"></i>
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[#3be7ed] transition-colors">
-                <i className="ri-mail-line text-xl"></i>
               </a>
             </div>
           </div>
@@ -52,22 +44,22 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Menu</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#about" className="text-gray-300 hover:text-[#3be7ed] transition-colors">
+                <a href="#about" className="text-[#696969] hover:text-[#3be7ed] transition-colors">
                   About
                 </a>
               </li>
               <li>
-                <a href="#skills" className="text-gray-300 hover:text-[#3be7ed] transition-colors">
+                <a href="#skills" className="text-[#696969] hover:text-[#3be7ed] transition-colors">
                   Skills
                 </a>
               </li>
               <li>
-                <a href="#works" className="text-gray-300 hover:text-[#3be7ed] transition-colors">
+                <a href="#works" className="text-[#696969] hover:text-[#3be7ed] transition-colors">
                   Works
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-gray-300 hover:text-[#3be7ed] transition-colors">
+                <a href="#contact" className="text-[#696969] hover:text-[#3be7ed] transition-colors">
                   Contact
                 </a>
               </li>
@@ -77,14 +69,10 @@ export default function Footer() {
           {/* 連絡先情報 */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-            <div className="space-y-2 text-gray-300">
+            <div className="space-y-2 text-[#696969]">
               <div className="flex items-center">
                 <i className="ri-mail-line mr-2"></i>
-                <span>contact@natomi.com</span>
-              </div>
-              <div className="flex items-center">
-                <i className="ri-phone-line mr-2"></i>
-                <span>090-1234-5678</span>
+                <span>natomi.work@gmail.com</span>
               </div>
               <div className="flex items-center">
                 <i className="ri-map-pin-line mr-2"></i>
@@ -100,14 +88,6 @@ export default function Footer() {
             <p className="text-gray-400 text-sm">
               © {currentYear} natomi. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-[#3be7ed] text-sm transition-colors">
-                プライバシーポリシー
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[#3be7ed] text-sm transition-colors">
-                利用規約
-              </a>
-            </div>
           </div>
         </div>
       </div>

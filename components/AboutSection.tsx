@@ -1,193 +1,465 @@
-
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import { Briefcase, GraduationCap, Sparkles, Plus, X } from 'lucide-react';
+import anim from './AboutSection.module.css';
 
 export default function AboutSection() {
+  // AboutSection 内（コンポーネント関数の先頭～中ほどでOK）
+  const [openCard, setOpenCard] = useState<number | null>(null);
+
+  // カード4枚の内容（モーダルでも使い回します）
+  const cards = [
+    {
+      title: 'Animal',
+      desc: 'フェレットと暮らしています。イヌ、ネコ、イルカ、ペンギン、ナマケモノなどなど、動物はだいたい好きです。',
+      modal: 'フェレットと暮らしています。イヌ、ネコ、イルカ、ペンギン、ナマケモノなどなど、動物はだいたい好きです。',
+      img: '/about/ferret.png'
+    },
+    {
+      title: 'Running',
+      desc: '時間があると川沿いを走ります。トレイルランニングで色々な山も走っています。',
+      modal: '時間があると川沿いを走ります。トレイルランニングで色々な山も走っています。',
+      img: '/about/run.png'
+    },
+    {
+      title: 'Travel',
+      desc: '地域の魅力を知る旅がすき。温泉やオーベルジュにこだわりのある宿探しをしています。',
+      modal: '地域の魅力を知る旅がすき。温泉やオーベルジュにこだわりのある宿探しをしています。',
+      img: '/about/trip.png'
+    },
+    {
+      title: 'Fisshing',
+      desc: '主に海釣り。アジからタイや本ガツオまで。魚は自ら捌いていただいています。',
+      modal: '主に海釣り。アジからタイや本ガツオまで。魚は自ら捌いていただいています。',
+      img: '/about/fish.png'
+    }
+  ];
+
+
+  // Escキーでモーダルを閉じる（アクセシビリティ）
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenCard(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+
   const [isVisible, setIsVisible] = useState(false);
   const [lineHeight, setLineHeight] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
-
     const element = document.getElementById('about');
-    if (element) {
-      observer.observe(element);
-    }
-
+    if (element) observer.observe(element);
     return () => observer.disconnect();
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const aboutSection = document.getElementById('about');
       if (!aboutSection) return;
-
       const sectionTop = aboutSection.offsetTop;
       const sectionHeight = aboutSection.offsetHeight;
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
-
-      // セクションが表示範囲に入ったときの計算
       const sectionStart = sectionTop - windowHeight;
       const sectionEnd = sectionTop + sectionHeight;
-
-      if (scrollPosition >= sectionStart && scrollPosition <= sectionEnd) {
-        // セクション内でのスクロール進行率を計算
-        const progress = Math.min(Math.max((scrollPosition - sectionStart) / (sectionEnd - sectionStart), 0), 1);
-        setLineHeight(progress * 100);
-      }
+      const progress = Math.min(Math.max((scrollPosition - sectionStart) / (sectionEnd - sectionStart), 0), 1);
+      setLineHeight(progress * 100);
     };
-
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // 初期値を設定
-
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const timelineItems = [
-    {
-      side: 'left',
-      period: '2025年〜',
-      role: 'ライター',
-      description: 'Webメディア、広報ライター'
-    },
-    {
-      side: 'left',
-      period: '〜2025年',
-      role: 'コミュニティマネージャー',
-      description: '地域バイヤープログラムのコミュマネとして受講生とのコミュニケーションを担当'
-    },
-    {
-      side: 'right',
-      period: '2024年',
-      role: 'インタビューライター養成講座',
-      description: '株式会社WHEREの講座。地域密着の取材執筆を行う'
-    },
-    {
-      side: 'right',
-      period: '2024年',
-      school: '地域バイヤープログラム',
-      description: '株式会社WHEREの講座。地域の生産者を訪問し、仕入れ、AKOMEYA TOKYOにてPOPUP販売'
-    },
-    {
-      side: 'right',
-      period: '2023年〜2024年',
-      school: 'G\'s Devコース',
-      description: 'HTML/CSS/PHP/Laravelのほか、Next.js/Reactを学ぶ。'
-    },
-    {
-      side: 'right',
-      period: '2022年〜2022年',
-      school: 'SAMURAI ENGINEER エキスパートコース',
-      description: 'HTML/CSS/PHP/Laravelを学ぶ。'
-    },
-    {
-      side: 'left',
-      period: '2017年〜2024年',
-      school: '化粧品・健康食品メーカー',
-      description: '物流・品質管理業務。製品の品質向上に貢献'
-    },
-    {
-      side: 'right',
-      period: '〜2008年',
-      school: '生物資源科学修士',
-      description: '遺伝学。鯨類胎盤の女性ホルモンについて解析。'
-    }
+  type Side = 'left' | 'right';
+  type RawItem = {
+    side: Side;
+    period: string;
+    role?: string;
+    school?: string;
+    description: string;
+  };
+
+  const timelineItems: RawItem[] = [
+    { side: 'left', period: '2025年〜', role: 'ライター', description: 'Webメディア、広報ライター' },
+    { side: 'left', period: '〜2025年', role: 'コミュニティマネージャー', description: '地域バイヤープログラムのコミュマネとして受講生とのコミュニケーションを担当' },
+    { side: 'right', period: '2024年', role: 'インタビューライター養成講座', description: '株式会社WHEREの講座。地域密着の取材執筆を行う' },
+    { side: 'right', period: '2024年', school: '地域バイヤープログラム', description: '地域の生産者を訪問し、仕入れ、AKOMEYA TOKYOにてPOPUP販売' },
+    { side: 'right', period: '2023年〜2024年', school: 'G\'s Devコース', description: 'HTML/CSS/PHP/Laravelのほか、Next.js/Reactを学ぶ。' },
+    { side: 'right', period: '2022年〜2022年', school: 'SAMURAI ENGINEER エキスパートコース', description: 'HTML/CSS/PHP/Laravelを学ぶ。' },
+    { side: 'left', period: '2017年〜2024年', school: '化粧品・健康食品メーカー', description: '物流・品質管理業務。製品の品質向上に貢献' },
+    { side: 'right', period: '〜2008年', school: '生物資源科学修士', description: '遺伝学。鯨類胎盤の女性ホルモンについて解析。' }
   ];
 
+  const workItems = timelineItems.filter(item => item.side === 'left');
+  const eduItems = timelineItems.filter(item => item.side === 'right');
+
+  // 期間文字列を年の範囲にパース
+  const parsePeriod = (period: string) => {
+    // 2つの年を抽出
+    const years = (period.match(/\d{4}(?=年)/g) || []).map(Number);
+    const hasLeading = /^〜/.test(period);
+    const hasTrailing = /〜$/.test(period);
+    const currentYear = new Date().getFullYear();
+
+    if (years.length === 2) {
+      const [start, end] = years[0] <= years[1] ? years : [years[1], years[0]];
+      return { start, end };
+    }
+    if (years.length === 1) {
+      const y = years[0];
+      if (hasTrailing) {
+        // 例: "2025年〜" => 現在年まで
+        return { start: y, end: Math.max(y, currentYear) };
+      }
+      if (hasLeading) {
+        // 例: "〜2008年" => 最低1年の幅で表現
+        return { start: y - 1, end: y };
+      }
+      // 単年
+      return { start: y, end: y };
+    }
+    // 不明な場合は最小範囲
+    const fallback = currentYear;
+    return { start: fallback, end: fallback };
+  };
+
+  type ParsedItem = RawItem & { start: number; end: number; title: string };
+
+  const parsedItems: ParsedItem[] = useMemo(() => {
+    return timelineItems.map((it) => {
+      const { start, end } = parsePeriod(it.period);
+      return { ...it, start, end, title: it.role || it.school || '' };
+    });
+  }, [timelineItems]);
+
+  const minYear = useMemo(() => Math.min(...parsedItems.map(i => i.start,)), [parsedItems]);
+  const maxYear = useMemo(() => Math.max(...parsedItems.map(i => i.end,)), [parsedItems]);
+  const rangeYears = Math.max(1, maxYear - minYear + 1);
+  const unit = 64; // 1年あたりのpx（広めに確保）
+
+  type Placed = { item: ParsedItem; top: number; height: number; bottom: number };
+
+  const { leftPlaced, rightPlaced, containerHeight } = useMemo(() => {
+    const baseHeight = rangeYears * unit;
+    const minBox = 140; // 1年のみでも十分な高さを確保
+    const gap = 10; // エントリ間の縦間隔
+
+    const placeSide = (side: Side): Placed[] => {
+      const list = parsedItems
+        .filter(i => i.side === side)
+        .sort((a, b) => {
+          const ta = (maxYear - a.end) * unit;
+          const tb = (maxYear - b.end) * unit;
+          if (ta !== tb) return ta - tb; // 新しい年が先
+          const lenA = a.end - a.start;
+          const lenB = b.end - b.start;
+          return lenB - lenA; // 長い期間を先に
+        });
+      const placed: Placed[] = [];
+      for (const it of list) {
+        const baseTop = (maxYear - it.end) * unit;
+        const height = Math.max(minBox, (it.end - it.start + 1) * unit - 8);
+        let top = baseTop;
+        const prev = placed[placed.length - 1];
+        if (prev && top < prev.bottom + gap) {
+          top = prev.bottom + gap; // 同カラム内の重なり回避
+        }
+        const bottom = top + height;
+        placed.push({ item: it, top, height, bottom });
+      }
+      return placed;
+    };
+
+    const leftPlaced = placeSide('left');
+    let rightPlaced = placeSide('right');
+
+    // 指定の並び: 左(2017-2024)と右(2024)を同じ段に揃える
+    const leftTarget = leftPlaced.find(p => p.item.end === 2024);
+    const rightIndex = rightPlaced.findIndex(p => p.item.end === 2024);
+    if (leftTarget && rightIndex >= 0) {
+      // 右の該当要素を左のtopに合わせる
+      rightPlaced[rightIndex] = {
+        ...rightPlaced[rightIndex],
+        top: leftTarget.top,
+        bottom: leftTarget.top + rightPlaced[rightIndex].height,
+      };
+      // 右の後続を重なり回避で下に送る
+      for (let i = rightIndex + 1; i < rightPlaced.length; i++) {
+        const prev = rightPlaced[i - 1];
+        if (rightPlaced[i].top < prev.bottom + gap) {
+          const height = rightPlaced[i].height;
+          rightPlaced[i].top = prev.bottom + gap;
+          rightPlaced[i].bottom = rightPlaced[i].top + height;
+        }
+      }
+    }
+
+    const maxBottom = Math.max(
+      baseHeight,
+      leftPlaced.length ? leftPlaced[leftPlaced.length - 1].bottom : 0,
+      rightPlaced.length ? rightPlaced[rightPlaced.length - 1].bottom : 0
+    );
+    return { leftPlaced, rightPlaced, containerHeight: maxBottom };
+  }, [parsedItems, maxYear, rangeYears, unit]);
+
   return (
-    <section id="about" className="py-20 bg-[#F9F9F9] mt-16">
+    <section id="about" className="py-20 bg-[#F9F9F9] mt-16 scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-3xl font-bold text-center mb-16 text-[#333]">About</h2>
+          <h2 className="text-3xl font-bold text-center mb-16 text-[#333]">わ た し の こ と</h2>
 
-          {/* プロフィールセクション */}
+          {/* プロフィール */}
           <div className="max-w-4xl mx-auto mb-16">
             <div className="bg-white p-8 rounded-lg shadow-sm">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                 <div className="flex-shrink-0">
-                  <Image src="/natomi.png" alt="プロフィール写真" width={128} height={128} className="rounded-full object-cover object-top border-4 border-[#3be7ed]"/>
-                  <img 
-                    src="/natomi.png"
-                    alt="プロフィール写真"
-                    className="w-32 h-32 rounded-full object-cover object-top border-4 border-[#3be7ed]"
-                  />
+                  <Image src="/natomi.png" alt="プロフィール写真" width={128} height={128} className="rounded-full object-cover object-top border-4 border-[#09dbd0]" />
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-2xl font-bold text-[#333] mb-4">N a t o m i</h3>
                   <div className="space-y-4 text-gray-700">
-                    <p>
-                      大学では生物学を専攻し、大学病院での研究補助、化粧品・健康食品メーカーでの物流・品質管理業務に従事してきました。
-                      プログラミングを学び、個人開発を楽しむ傍ら、フリーランスライターとして取り組んでいます。
-                    </p>
-                    <p>
-                      新しい技術を学ぶことが好きで、ユーザーにとって使いやすく、
-                      価値のあるWebサービスを作ることを目指しています。
-                    </p>
+                    <p>小さい頃から動物が大好き。大学では海洋学を専攻し、クジラや{" "}<span className="relative inline-block group align-baseline">
+                      <span className="font-semibold text-[#06becf]">イルカ</span>
+                      <span aria-hidden className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100">
+                      <Image src="/icons/dolphin.png" alt="イルカアイコン" width={35} height={35} className="drop-shadow-md"/>
+                    </span></span>の研究をしていました。</p>
+
+                    <p>仕事は事務や大学病院での研究補助、化粧品・健康食品メーカーで物流管理や品質管理の仕事を経験。<br></br>
+                    現在はライターとしても活動しています。</p>
+                    <p>2022年よりプログラミングに興味をもち、個人開発を楽しむ日々。<br></br>
+                    新しい技術を試すのが好きで、”使いやすくてちょっと{" "}<span className="relative inline-block group align-baseline">
+                      <span className="font-semibold text-[#06becf]">心が動く</span>
+                      <span aria-hidden className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100">
+                      <Image src="/icons/heart.png" alt="♡アイコン" width={35} height={35} className="drop-shadow-md"/>
+                    </span></span>”ようなWebサービスをつくることを目指しています。</p>
                     <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
-                      <span className="px-3 py-1 bg-[#3be7ed] text-white text-sm rounded-full">ライティング</span>
-                      <span className="px-3 py-1 bg-[#3be7ed] text-white text-sm rounded-full">開発</span>
-                      <span className="px-3 py-1 bg-[#3be7ed] text-white text-sm rounded-full">生成AI</span>
+                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># ライティング</span>
+                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># 開発</span>
+                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># 生成AI</span>
+                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># WebAR</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* 職歴・学歴タイムライン */}
-          <div className="max-w-6xl mx-auto">
-            <div className="relative">
-              <div className="hidden md:flex w-full mb-8">
-                <div className="w-1/2 flex justify-center">
-                  <h3 className="text-xl font-bold text-[#333]">Work Experience</h3>
+
+          {/* 4枚のカード（レスポンシブ：1→2→4列） */}
+{/* 4枚のカード（レスポンシブ：1→2→4列） */}
+<div className="max-w-6xl mx-auto mb-16">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {cards.map((c, i) => (
+      <article
+        key={i}
+        className="group relative bg-white rounded-lg shadow-sm border border-gray-100 p-6 h-full transition-shadow hover:shadow-md focus-within:shadow-md"
+      >
+        {/* タイトルのみ表示（descは消す） */}
+        <h4 className="text-base font-semibold text-[#333]">{c.title}</h4>
+
+        {/* 右下の➕：ホバーで45°回転＋サイズ拡大＆クリックで拡大カード */}
+        <button
+          type="button"
+          aria-label={`${c.title} の詳細を開く`}
+          onClick={() => setOpenCard(i)}
+          className="
+            absolute bottom-4 right-4
+            grid place-items-center
+            w-11 h-11 sm:w-12 sm:h-12
+            rounded-full
+            transition
+            hover:bg-gray-100
+            focus:outline-none focus:ring-2 focus:ring-[#09dbd0]/30
+          "
+        >
+          <Plus
+            className="
+              text-[#696969]
+              w-7 h-7 sm:w-8 sm:h-8
+              transition-transform duration-300 ease-out
+              hover:rotate-45 hover:scale-125
+            "
+            strokeWidth={5}
+          />
+        </button>
+      </article>
+    ))}
+  </div>
+</div>
+
+
+          {/* 拡大カード（オーバーレイ） */}
+          {openCard !== null && (
+            <div
+              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[1px] flex items-center justify-center p-4"
+              onClick={(e) => {
+                if (e.target === e.currentTarget) setOpenCard(null); // 背景クリックで閉じる
+              }}
+              aria-modal="true"
+              role="dialog"
+            >
+              <div
+                className="
+                  relative w-full max-w-3xl
+                  bg-white rounded-2xl shadow-2xl
+                  p-6 sm:p-8
+                  transition-transform duration-300 ease-out
+                  animate-in scale-100
+                "
+                style={{
+                  // 初回 “飛び出し感” を少し強調
+                  transform: 'translateZ(0)',
+                }}
+                onClick={(e) => e.stopPropagation()} // 内側クリックで閉じない
+              >
+                {/* 閉じるボタン */}
+                <button
+                  type="button"
+                  aria-label="閉じる"
+                  onClick={() => setOpenCard(null)}
+                  className="absolute top-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#09dbd0]/30"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+
+                {/* 左上から出てくる画像（横揺れ継続） */}
+                <div className="absolute -top-8 -left-8">
+                  <div className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden ${anim.popIn}`}>
+                    <Image src={cards[openCard].img} alt={`${cards[openCard].title} のイメージ`} fill sizes="112px" className={`object-cover ${anim.sway}`} priority/>
+                  </div>
                 </div>
-                <div className="w-1/2 flex justify-center">
-                  <h3 className="text-xl font-bold text-[#333]">Education</h3>
+
+                {/* 本文（画像バッジが被らないよう余白） */}
+                <div className="mt-12 sm:mt-16 ml-16 sm:ml-20">
+                  <p className="text-gray-700 leading-relaxed">
+                    {cards[openCard].modal}
+                  </p>
                 </div>
               </div>
-              {/* 背景の線（グレー） */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-300 hidden md:block"></div>
+            </div>
+          )}
 
-              {/* アニメーションの線（青） */}              
-              <div 
-                className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-[#3be7ed] hidden md:block transition-all duration-300 ease-out"
-                style={{ height: `${lineHeight}%` }}
-              ></div>
-              
-              <div className="space-y-8">
-                {timelineItems.map((item, index) => (
-                  <div key={index} className={`timeline-item relative ${
-                    item.side === 'left' ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left md:ml-auto'
-                  } md:w-1/2`}>
-                    <div className={`bg-white p-6 rounded-lg shadow-sm ${
-                      item.side === 'left' ? 'md:mr-8' : 'md:ml-8'
-                    }`}>
-                      <div className={`absolute top-8 w-3 h-3 bg-[#3be7ed] rounded-full transform ${
-                        item.side === 'left' 
-                          ? 'right-0 translate-x-1/2' 
-                          : 'left-0 -translate-x-1/2'
-                      } hidden md:block`}></div>
-                      
-                      <div className="text-sm text-[#3be7ed] font-medium mb-2">{item.period}</div>
-                      <h4 className="text-lg font-semibold text-[#333] mb-2">
-                        {item.role || item.school}
-                      </h4>
-                      <p className="text-gray-700 text-sm">{item.description}</p>
-                    </div>
+          {/* スマホ：上下に分けたタイムライン */}
+          <div className="space-y-12 md:hidden">
+            <div>
+              <h3 className="flex items-center justify-center md:justify-start text-base md:text-xl font-bold text-[#06becf] mb-2 md:mb-4">
+                <Briefcase className="w-5 h-5 mr-2" />
+                しごと
+              </h3>
+              <div className="space-y-6">
+                {workItems.map((item, i) => (
+                  <div key={`work-${i}`} className="bg-white p-6 rounded-lg shadow-sm">
+                    <div className="text-sm text-[#808080] font-medium mb-2">{item.period}</div>
+                    <h4 className="text-lg font-semibold text-[#333] mb-2">{item.role || item.school}</h4>
+                    <p className="text-gray-700 text-sm">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="flex items-center justify-center md:justify-start text-base md:text-xl font-bold text-[#066bcf] mb-2 md:mb-4">
+                <GraduationCap className="w-5 h-5 mr-2" />
+                まなび
+              </h3>
+              <div className="space-y-6">
+                {eduItems.map((item, i) => (
+                  <div key={`edu-${i}`} className="bg-white p-6 rounded-lg shadow-sm">
+                    <div className="text-sm text-[#808080] font-medium mb-2">{item.period}</div>
+                    <h4 className="text-lg font-semibold text-[#333] mb-2">{item.role || item.school}</h4>
+                    <p className="text-gray-700 text-sm">{item.description}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+
+          {/* PC：左右に分けた（年数比例）タイムライン */}
+          <div className="max-w-6xl mx-auto hidden md:block">
+            <div className="relative">
+              <div className="flex w-full mb-4">
+                <div className="w-1/2 flex justify-center">
+                  <h3 className="text-xl font-bold text-[#06becf] flex items-center gap-2">
+                    <Briefcase className="w-5 h-5" /> しごと
+                  </h3>
+                </div>
+                <div className="w-1/2 flex justify-center">
+                  <h3 className="text-xl font-bold text-[#066bcf] flex items-center gap-2">
+                    <GraduationCap className="w-5 h-5" /> まなび
+                  </h3>
+                </div>
+              </div>
+              {/* 軸（年数スケール共通） */}
+              <div className="relative" style={{ height: containerHeight }}>
+                <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-gray-300" />
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 w-0.5 bg-[#09dbd0] transition-all duration-300 ease-out"
+                  style={{ height: `${lineHeight}%` }}
+                />
+
+                {/* 左右コンテナ（絶対配置） */}
+                <div className="absolute inset-y-0 left-0 w-1/2 pr-8">
+                  {leftPlaced.map((placed, idx) => {
+                    const { item, top, height } = placed;
+                    return (
+                      <div key={`L-${idx}`} className="absolute left-0 right-8 text-right" style={{ top, height }}>
+                        <div className="bg-white p-4 rounded-lg shadow-sm mr-8 h-full flex flex-col justify-center">
+                          <div className="text-sm text-[#808080] font-medium mb-1">{item.period}</div>
+                          <h4 className="text-base font-semibold text-[#333] mb-1">{item.title}</h4>
+                          <p className="text-gray-700 text-sm leading-relaxed">{item.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="absolute inset-y-0 right-0 w-1/2 pl-8">
+                  {rightPlaced.map((placed, idx) => {
+                    const { item, top, height } = placed;
+                    return (
+                      <div key={`R-${idx}`} className="absolute right-0 left-8 text-left" style={{ top, height }}>
+                        <div className="bg-white p-4 rounded-lg shadow-sm ml-8 h-full flex flex-col justify-center">
+                          <div className="text-sm text-[#808080] font-medium mb-1">{item.period}</div>
+                          <h4 className="text-base font-semibold text-[#333] mb-1">{item.title}</h4>
+                          <p className="text-gray-700 text-sm leading-relaxed">{item.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* 中央線上のドット（左右で色分け） */}
+                <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-0 w-0">
+                  {leftPlaced.map((p, i) => (
+                    <span
+                      key={`DL-${i}`}
+                      aria-hidden
+                      className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#06becf] ring-2 ring-white shadow"
+                      style={{ top: p.top + p.height / 2 }}
+                    />
+                  ))}
+                  {rightPlaced.map((p, i) => (
+                    <span
+                      key={`DR-${i}`}
+                      aria-hidden
+                      className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#066bcf] ring-2 ring-white shadow"
+                      style={{ top: p.top + p.height / 2 }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
