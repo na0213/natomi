@@ -31,7 +31,7 @@ export default function WorkPage1() {
                 モバイルファーストで設計した、ポートフォリオサイト
               </p>
                 <Link
-                href="https://pet-commons.vercel.app/" // ←公開URLに差し替え
+                href="https://www.natomi.work/" // ←公開URLに差し替え
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[#3be7ed] hover:text-[#2dd4da] underline underline-offset-4"
