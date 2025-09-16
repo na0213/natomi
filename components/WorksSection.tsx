@@ -33,6 +33,28 @@ const works: WorkItem[] = [
       desktop: '/works/1/desktop.png',
     },
   },
+  {
+    id: '2',
+    title: 'Pet Commons（試作）',
+    description: 'Webサイト，自主制作',
+    category: 'LP',
+    videoSrc: '/works/petcommon/petcommon.mp4',
+    mockups: {
+      mobile: '/works/1/mobile.png',
+      desktop: '/works/1/desktop.png',
+    },
+  },
+  {
+    id: '3',
+    title: 'ポートフォリオ',
+    description: 'ポートフォリオサイト，自主制作',
+    category: 'ポートフォリオ',
+    videoSrc: '/works/petcommon/petcommon.mp4',
+    mockups: {
+      mobile: '/works/1/mobile.png',
+      desktop: '/works/1/desktop.png',
+    },
+  },
 
   {
     id: 'ai-1',
@@ -62,55 +84,105 @@ export default function WorksSection() {
 
         {normal.map(w => (
           <div key={w.id} className="space-y-4">
-            <p className="text-lg text-[#86888a]">{w.category}</p>
+            <p className="text-lg text-[#86888a] font-bold">{w.category}</p>
+          {w.id === '3' ? (
+            // ===== id=3：画像3枚のスタイリッシュレイアウト =====
             <Link href={`/works/${w.id}`} className="block">
-              <div className="flex flex-col md:flex-row items-center md:items-start">
-                {/* 左：大きめ GIF プレビュー */}
-                <div className="w-full md:w-3/5">
-                  <video src={w.videoSrc} autoPlay loop muted preload="metadata" playsInline className="w-full h-auto object-cover rounded-lg overflow-hidden"/>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* 左：縦に2枚 */}
+                <div className="grid grid-rows-2 gap-4 md:col-span-1">
+                  <Image
+                    src="/works/portfolio/mobile.png" // ←1枚目
+                    alt={`${w.title} モバイル画面`}
+                    width={300}
+                    height={400}
+                    className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+                  />
+                  <Image
+                    src="/works/portfolio/mobile2.png" // ←2枚目
+                    alt={`${w.title} モバイル画面 2`}
+                    width={300}
+                    height={400}
+                    className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+                  />
                 </div>
-                {/* 中央の余白 */}
-                <div className="hidden md:block md:w-1/12" />
-                {/* 右：モックアップ画像2列 */}
-                <div className="w-full md:w-2/5 grid grid-cols-2 gap-4">
-                  <Image src={w.mockups.mobile} alt={`${w.title} モバイルモック`} width={300} height={200} className="w-full h-auto object-cover rounded"/>
-                  <Image src={w.mockups.desktop} alt={`${w.title} デスクトップモック`} width={300} height={200} className="w-full h-auto object-cover rounded"/>
+
+                {/* 右：大きな1枚 */}
+                <div className="md:col-span-2">
+                  <Image
+                    src="/works/portfolio/desktop.png" // ←大きいPC用
+                    alt={`${w.title} デスクトップ画面`}
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+                  />
                 </div>
               </div>
             </Link>
+          ) :w.id === '2' ? (
+              // ===== id=2：動画のみを中央配置（その他は削除） =====
+              <Link href={`/works/${w.id}`} className="block">
+                <div className="w-full flex justify-center">
+                  <div className="w-full max-w-4xl">
+                    <video
+                      src={w.videoSrc}
+                      autoPlay
+                      loop
+                      muted
+                      preload="metadata"
+                      playsInline
+                      className="w-full h-auto object-contain rounded-lg overflow-hidden"
+                    />
+                  </div>
+                </div>
+              </Link>
+            ) : (
+              // ===== それ以外（id=1 など）：従来レイアウト維持 =====
+              <Link href={`/works/${w.id}`} className="block">
+                <div className="flex flex-col md:flex-row items-center md:items-start">
+                  {/* 左：大きめ GIF/動画 プレビュー */}
+                  <div className="w-full md:w-3/5">
+                    <video
+                      src={w.videoSrc}
+                      autoPlay
+                      loop
+                      muted
+                      preload="metadata"
+                      playsInline
+                      className="w-full h-auto object-cover rounded-lg overflow-hidden"
+                    />
+                  </div>
+                  {/* 中央の余白 */}
+                  <div className="hidden md:block md:w-1/12" />
+                  {/* 右：モックアップ画像2列 */}
+                  <div className="w-full md:w-2/5 grid grid-cols-2 gap-4">
+                    <Image
+                      src={w.mockups.mobile}
+                      alt={`${w.title} モバイルモック`}
+                      width={300}
+                      height={200}
+                      className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+                    />
+                    <Image
+                      src={w.mockups.desktop}
+                      alt={`${w.title} デスクトップモック`}
+                      width={300}
+                      height={200}
+                      className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+                    />
+                  </div>
+                </div>
+              </Link>
+            )}
+
+            {/* タイトル & 説明（共通で残す場合） */}
             <div className="px-2 md:px-0">
-              <h3 className="text-xl font-semibold text-[#333]">{w.title}</h3>
+              <h3 className="text-xl text-[#333]">{w.title}</h3>
               <p className="text-sm text-gray-600">{w.description}</p>
             </div>
           </div>
         ))}
 
-        {/* 生成AI作品 */}
-        <div>
-          <p className="text-lg text-[#86888a] mb-4">生成AI</p>
-          <div className="overflow-x-auto">
-            <div className="flex gap-4 w-max">
-              {aiList.map(w => (
-                <div
-                  key={w.id}
-                  className="min-w-[260px] rounded-lg transition cursor-pointer"
-                  onClick={() => setSelected(w)}
-                >
-                  <Image
-                    src={w.thumbnail!}
-                    alt={w.title}
-                    width={260}
-                    height={160}
-                    className="w-full h-40 object-cover rounded"
-                  />
-                  <div className="p-3">
-                    <h4 className="text-sm font-medium">{w.title}</h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* モーダル */}
         {selected && (

@@ -159,12 +159,9 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="submit-btn w-full bg-[#3be7ed] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#2dd4da] disabled:opacity-50 disabled:cursor-not-allowed transition-all whitespace-nowrap"
-                >
+              <div className="flex items-center justify-center pt-4">
+                <button type="submit" disabled={isSubmitting}
+                  className="submit-btn w-1/3 bg-[#3be7ed] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#2dd4da] disabled:opacity-50 disabled:cursor-not-allowed transition-all whitespace-nowrap">
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
                       <i className="ri-loader-2-line animate-spin mr-2"></i>

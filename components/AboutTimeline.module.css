@@ -1,0 +1,154 @@
+/* AboutTimeline.module.css */
+
+/* レイアウト＆色 */
+.wrap {
+  --gutter: 48px;          /* 中央の溝（中央線の幅） */
+  --pad-h: 24px;           /* 行の横余白（下線の見た目調整用） */
+  --rail: 1px;             /* 中央線（背景） */
+  --rail-active: 2px;      /* 細め */
+  --c-left: #374151;       /* gray-700 */
+  --c-right:#374151;       /* 両側同じ色にして幼さ回避 */
+  --c-rail: #E5E7EB;       /* gray-200 */
+  --c-rail-active:#9CA3AF; /* gray-400 */
+
+  position: relative;
+  padding: 8px 0 32px;
+  background: transparent;
+}
+
+.heads {
+  display: grid;
+  grid-template-columns: 1fr var(--gutter) 1fr;
+  align-items: center;
+  max-width: 1120px;
+  margin: 0 auto 12px;
+  padding: 0 16px;
+}
+.headIcon{
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: -3px; /* 文字と高さを揃える微調整 */
+}
+.hLeft, .hRight {
+  color: #374151;          /* gray-700 */
+  font-weight: 700;        /* 800→700 に */
+  letter-spacing: .04em;   /* 追い込みを少し弱く */
+  margin: 0;
+  font-size: 20px;
+  display: inline-flex;        /* ←追加 */
+  align-items: center;         /* ←追加 */
+  justify-content: center;     /* ←追加 */
+}
+.hLeft { color: var(--c-left);  grid-column: 1 / 2; text-align: center; }
+.hRight{ color: var(--c-right); grid-column: 3 / 4; text-align: center; }
+
+.timeline {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+  position: relative; /* ←中央線をabsoluteで敷くため */
+}
+/* 年ごとの1行をグリッドで並べる（左 | 溝 | 右） */
+.rows {
+  display: grid;
+  grid-template-columns: 1fr var(--gutter) 1fr;
+  gap: 0;
+  position: relative;
+}
+
+/* 溝のプレースホルダ（実際の中央線はabsoluteで描画） */
+.gutter {
+  grid-column: 2 / 3;
+}
+
+/* 中央線（背景 & 進捗） */
+.centerRail,
+.centerProgress {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  pointer-events: none;
+}
+.centerRail {
+  bottom: 0;
+  width: var(--rail);
+  background: var(--c-rail);
+  z-index: 1;
+}
+.centerProgress {
+  width: 1px;                 /* 細さはここ */
+  height: 0;
+  background: var(--c-rail-active);
+  z-index: 2;
+  transition: height .2s linear;
+}
+
+.row {
+  position: relative;
+  padding: 22px var(--pad-h) 28px;
+}
+.rowSpacer {
+  padding: 22px var(--pad-h) 28px;
+  visibility: hidden;   /* スペース確保だけして非表示 */
+}
+
+/* 左右はテキスト色だけ違う */
+.meta { color: #6B7280; font-size: 12px; margin-bottom: 6px; letter-spacing: .03em; }
+.titleLeft, .titleRight { color: #374151; font-weight: 600; font-size: 16px; line-height: 1.45; margin: 0 0 6px; }
+.titleLeft  { color: var(--c-left); }
+.titleRight { color: var(--c-right); }
+.desc { color: #4b5563; font-size: 14px; line-height: 1.9; margin: 0; }
+
+/* 下線（中央から左右へ） */
+.underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(9,219,208,0.25), rgba(9,219,208,0.9));
+  width: 0;
+  transition: width .45s ease;
+  z-index: 4;
+}
+.uLeft  { right: calc(var(--pad-h) * -1 + var(--gutter) / 2 * -1); left: auto; }
+.uRight { left:  calc(var(--pad-h) * -1 + var(--gutter) / 2 * -1); right: auto; }
+.reached.uLeft,
+.reached.uRight { width: calc(100% + var(--gutter) / 2); }
+
+/* スマホ少し調整（必要なら） */
+@media (max-width: 768px) {
+ .wrap { --gutter: 36px; --pad-h: 16px; }
+
+  /* 行グリッドを 1 カラムへ（左→右の順に縦積みされます） */
+  .rows {
+    grid-template-columns: 1fr;
+  }
+
+  /* 溝は不要 */
+  .gutter {
+    display: none;
+  }
+
+  /* 中央線はスマホでは非表示（必要なら残してOK） */
+  .centerRail,
+  .centerProgress {
+    display: none;
+  }
+
+  /* 1カラム時の下線：左右とも同じ見た目で全幅に伸びる */
+  .uLeft,
+  .uRight {
+    left: var(--pad-h);
+    right: var(--pad-h);
+  }
+  .reached.uLeft,
+  .reached.uRight {
+    width: calc(100% - var(--pad-h) * 2);
+  }
+
+  .titleLeft, .titleRight { font-size: 16px; }
+  .desc { font-size: 13px; }
+}

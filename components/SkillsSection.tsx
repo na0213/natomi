@@ -22,7 +22,7 @@ export default function SkillsSection() {
       id: 'php',
       name: 'PHP（Laravel）',
       icon: 'ri-code-s-slash-line',
-      description: 'Laravelを使ったWebアプリケーション開発の実務経験',
+      description: 'Laravelを使ったWebサイト開発経験',
     },
     {
       id: 'reactnext',
@@ -38,9 +38,15 @@ export default function SkillsSection() {
     },
     {
       id: 'genai',
-      name: '生成AI活用（パスポート取得）',
+      name: '生成AI活用',
       icon: 'ri-robot-2-line',
-      description: '生成AIを活用したWeb制作・文章生成・動画制作が可能',
+      description: '生成AIを活用したWeb制作・文章生成・動画制作が可能。生成AIパスポート取得',
+    },
+    {
+      id: 'blender',
+      name: 'Blender',
+      icon: 'ri-blender-line',
+      description: '3Dモデリング・レンダリングの基礎を学習中。8th WallやRodinと組み合わせてWebAR制作を目指す',
     },
   ];
 

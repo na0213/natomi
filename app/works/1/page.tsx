@@ -26,12 +26,23 @@ export default function WorkPage1() {
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="mb-8">
-              <Link href="/#works" className="inline-flex items-center text-[#3be7ed] hover:text-[#2dd4da] mb-4">
-                <i className="ri-arrow-left-line mr-2"></i>
-                戻る
-              </Link>
+            <button onClick={() => router.back()} className="inline-flex items-center text-[#3be7ed] hover:text-[#2dd4da] mb-4">
+              <i className="ri-arrow-left-line mr-2"></i>
+              戻る
+            </button>
               <h1 className="text-3xl text-[#333] mb-2">ウェルフェアFARM</h1>
               <p className="text-gray-600">アニマルウェルフェアを中心とした牧場訪問サイト</p>
+              <div className="mt-3">
+              <Link
+                href="https://www.farm360.jp" // ←公開URLに差し替え
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#3be7ed] hover:text-[#2dd4da] underline underline-offset-4"
+              >
+                WEBサイトへ
+                <i className="ri-external-link-line text-sm" />
+              </Link>
+            </div>
             </div>
 
             {/* === ここから：1カラム構成に統一 === */}

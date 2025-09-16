@@ -1365,6 +1365,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "(ssr)/./node_modules/next/dist/api/navigation.js":
+/*!**************************************************!*\
+  !*** ./node_modules/next/dist/api/navigation.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _client_components_navigation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../client/components/navigation */ \"(ssr)/./node_modules/next/dist/client/components/navigation.js\");\n/* harmony import */ var _client_components_navigation__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_client_components_navigation__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};\n/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _client_components_navigation__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== \"default\") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _client_components_navigation__WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]\n/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);\n\n\n//# sourceMappingURL=navigation.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2FwaS9uYXZpZ2F0aW9uLmpzIiwibWFwcGluZ3MiOiI7Ozs7OztBQUFnRDs7QUFFaEQiLCJzb3VyY2VzIjpbIi9Vc2Vycy9uYXRzdW1pL0RvY3VtZW50cy9uYXRvbWkvbm9kZV9tb2R1bGVzL25leHQvZGlzdC9hcGkvbmF2aWdhdGlvbi5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuLi9jbGllbnQvY29tcG9uZW50cy9uYXZpZ2F0aW9uJztcblxuLy8jIHNvdXJjZU1hcHBpbmdVUkw9bmF2aWdhdGlvbi5qcy5tYXAiXSwibmFtZXMiOltdLCJpZ25vcmVMaXN0IjpbMF0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/dist/api/navigation.js\n");
+
+/***/ }),
+
 /***/ "(ssr)/./node_modules/next/dist/client/add-base-path.js":
 /*!********************************************************!*\
   !*** ./node_modules/next/dist/client/add-base-path.js ***!
@@ -4274,6 +4285,16 @@ eval("// This regex will have fast negatives meaning valid identifiers may not p
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nObject.defineProperty(exports, \"warnOnce\", ({\n    enumerable: true,\n    get: function() {\n        return warnOnce;\n    }\n}));\nlet warnOnce = (_)=>{};\nif (true) {\n    const warnings = new Set();\n    warnOnce = (msg)=>{\n        if (!warnings.has(msg)) {\n            console.warn(msg);\n        }\n        warnings.add(msg);\n    };\n} //# sourceMappingURL=warn-once.js.map\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L3NoYXJlZC9saWIvdXRpbHMvd2Fybi1vbmNlLmpzIiwibWFwcGluZ3MiOiI7Ozs7NENBV1NBOzs7ZUFBQUE7OztBQVhULElBQUlBLFdBQVcsQ0FBQ0MsS0FBZTtBQUMvQixJQUFJQyxJQUFvQixFQUFtQjtJQUN6QyxNQUFNRyxXQUFXLElBQUlDO0lBQ3JCTixXQUFXLENBQUNPO1FBQ1YsSUFBSSxDQUFDRixTQUFTRyxHQUFHLENBQUNELE1BQU07WUFDdEJFLFFBQVFDLElBQUksQ0FBQ0g7UUFDZjtRQUNBRixTQUFTTSxHQUFHLENBQUNKO0lBQ2Y7QUFDRiIsInNvdXJjZXMiOlsiL3NyYy9zaGFyZWQvbGliL3V0aWxzL3dhcm4tb25jZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJsZXQgd2Fybk9uY2UgPSAoXzogc3RyaW5nKSA9PiB7fVxuaWYgKHByb2Nlc3MuZW52Lk5PREVfRU5WICE9PSAncHJvZHVjdGlvbicpIHtcbiAgY29uc3Qgd2FybmluZ3MgPSBuZXcgU2V0PHN0cmluZz4oKVxuICB3YXJuT25jZSA9IChtc2c6IHN0cmluZykgPT4ge1xuICAgIGlmICghd2FybmluZ3MuaGFzKG1zZykpIHtcbiAgICAgIGNvbnNvbGUud2Fybihtc2cpXG4gICAgfVxuICAgIHdhcm5pbmdzLmFkZChtc2cpXG4gIH1cbn1cblxuZXhwb3J0IHsgd2Fybk9uY2UgfVxuIl0sIm5hbWVzIjpbIndhcm5PbmNlIiwiXyIsInByb2Nlc3MiLCJlbnYiLCJOT0RFX0VOViIsIndhcm5pbmdzIiwiU2V0IiwibXNnIiwiaGFzIiwiY29uc29sZSIsIndhcm4iLCJhZGQiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/dist/shared/lib/utils/warn-once.js\n");
+
+/***/ }),
+
+/***/ "(ssr)/./node_modules/next/font/google/target.css?{\"path\":\"components/AboutSection.tsx\",\"import\":\"Darumadrop_One\",\"arguments\":[{\"weight\":\"400\",\"subsets\":[\"latin\"],\"display\":\"swap\"}],\"variableName\":\"darumadrop\"}":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/font/google/target.css?{"path":"components/AboutSection.tsx","import":"Darumadrop_One","arguments":[{"weight":"400","subsets":["latin"],"display":"swap"}],"variableName":"darumadrop"} ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+eval("// Exports\nmodule.exports = {\n\t\"style\": {\"fontFamily\":\"'Darumadrop One', 'Darumadrop One Fallback'\",\"fontWeight\":400,\"fontStyle\":\"normal\"},\n\t\"className\": \"__className_e4ff75\"\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP3tcInBhdGhcIjpcImNvbXBvbmVudHMvQWJvdXRTZWN0aW9uLnRzeFwiLFwiaW1wb3J0XCI6XCJEYXJ1bWFkcm9wX09uZVwiLFwiYXJndW1lbnRzXCI6W3tcIndlaWdodFwiOlwiNDAwXCIsXCJzdWJzZXRzXCI6W1wibGF0aW5cIl0sXCJkaXNwbGF5XCI6XCJzd2FwXCJ9XSxcInZhcmlhYmxlTmFtZVwiOlwiZGFydW1hZHJvcFwifSIsIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0EsV0FBVyxpR0FBaUc7QUFDNUc7QUFDQSIsInNvdXJjZXMiOlsiL1VzZXJzL25hdHN1bWkvRG9jdW1lbnRzL25hdG9taS9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP3tcInBhdGhcIjpcImNvbXBvbmVudHMvQWJvdXRTZWN0aW9uLnRzeFwiLFwiaW1wb3J0XCI6XCJEYXJ1bWFkcm9wX09uZVwiLFwiYXJndW1lbnRzXCI6W3tcIndlaWdodFwiOlwiNDAwXCIsXCJzdWJzZXRzXCI6W1wibGF0aW5cIl0sXCJkaXNwbGF5XCI6XCJzd2FwXCJ9XSxcInZhcmlhYmxlTmFtZVwiOlwiZGFydW1hZHJvcFwifSJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBFeHBvcnRzXG5tb2R1bGUuZXhwb3J0cyA9IHtcblx0XCJzdHlsZVwiOiB7XCJmb250RmFtaWx5XCI6XCInRGFydW1hZHJvcCBPbmUnLCAnRGFydW1hZHJvcCBPbmUgRmFsbGJhY2snXCIsXCJmb250V2VpZ2h0XCI6NDAwLFwiZm9udFN0eWxlXCI6XCJub3JtYWxcIn0sXG5cdFwiY2xhc3NOYW1lXCI6IFwiX19jbGFzc05hbWVfZTRmZjc1XCJcbn07XG4iXSwibmFtZXMiOltdLCJpZ25vcmVMaXN0IjpbMF0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/font/google/target.css?{\"path\":\"components/AboutSection.tsx\",\"import\":\"Darumadrop_One\",\"arguments\":[{\"weight\":\"400\",\"subsets\":[\"latin\"],\"display\":\"swap\"}],\"variableName\":\"darumadrop\"}\n");
 
 /***/ })
 

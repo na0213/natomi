@@ -1,160 +1,185 @@
+// app/works/1/page.tsx
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import styles from './page.module.css';
 
-export default function WorkPage2() {
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+
+export default function WorkPage1() {
+  const router = useRouter();
+  const handleNavigate = (sectionId: string) => router.push(`/#${sectionId}`);
+
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <Link href="/#works" className="inline-flex items-center text-[#3be7ed] hover:text-[#2dd4da] mb-4">
+    <div className="min-h-screen flex flex-col bg-white">
+      <Header activeSection="works" onNavigate={handleNavigate} />
+
+      <main className="flex-grow pt-16 md:pt-20">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            {/* ===== ヘッダー部分の文言変更 ===== */}
+            <div className="mb-8">
+            <button onClick={() => router.back()} className="inline-flex items-center text-[#3be7ed] hover:text-[#2dd4da] mb-4">
               <i className="ri-arrow-left-line mr-2"></i>
               戻る
-            </Link>
-            <h1 className="text-3xl font-bold text-[#333] mb-2">個人開発２</h1>
-            <p className="text-gray-600">中小企業向けECサイト開発プロジェクト</p>
-          </div>
+            </button>
+              <h1 className="text-3xl text-[#333] mb-2">Pet Commons（試作）</h1>
+              <p className="text-gray-600">
+                モバイルファーストで作る、飼い主コミュニティのLPデモ（HTML/CSS/JS + Vercel）
+              </p>
+                <Link
+                href="https://pet-commons.vercel.app/" // ←公開URLに差し替え
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#3be7ed] hover:text-[#2dd4da] underline underline-offset-4"
+              >
+                WEBサイトへ
+                <i className="ri-external-link-line text-sm" />
+              </Link>
+            </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div className="device-showcase">
-              <div className="desktop-mockup mb-8">
-                <div className="relative bg-gray-900 rounded-t-lg p-2">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  </div>
-                  <div className="bg-white rounded h-80 flex items-center justify-center">
-                    <Image src="https://readdy.ai/api/search-image?query=modern%20e-commerce%20website%20desktop%20mockup%2C%20clean%20interface%20design%2C%20professional%20business%20website%2C%20cyan%20color%20scheme%2C%20product%20showcase%20layout%2C%20responsive%20design&width=600&height=400&seq=desktop-mock&orientation=landscape" alt="Desktop Mockup" width={600} height={400} className="w-full h-full object-cover object-top rounded"/>
+            {/* ===== モック ===== */}
+            <div className="mb-16">
+              <div className="bg-[#F9F9F9] rounded-lg p-4 overflow-visible">
+                {/* PCモック（高さを大きく調整） */}
+                <div className="desktop-mockup mb-12">
+                  <div className="relative bg-[#ffffff] rounded-t-lg p-2">
+                    <div className="bg-white rounded h-[28rem] md:h-[34rem] lg:h-[42rem] flex items-center justify-center overflow-hidden">
+                      <Image
+                        src="/works/petcommon/mobile.png"
+                        alt="Pet Commons Desktop"
+                        width={1600}
+                        height={1000}
+                        className="w-full h-full object-contain rounded"
+                        priority
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="mobile-mockup lg:ml-8">
-                <div className="relative bg-gray-900 rounded-2xl p-3 w-60 mx-auto">
-                  <div className="bg-white rounded-xl h-96 flex items-center justify-center">
-                    <Image src="https://readdy.ai/api/search-image?query=mobile%20e-commerce%20website%20interface%2C%20responsive%20design%2C%20smartphone%20mockup%2C%20modern%20UI%20design%2C%20cyan%20accents%2C%20clean%20layout%2C%20professional%20mobile%20app&width=300&height=500&seq=mobile-mock&orientation=portrait" alt="Mobile Mockup" width={300} height={500} className="w-full h-full object-cover object-top rounded-xl"/>
+                {/* PC画像 + スマホ画像の2分割（6:4） */}
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
+                  {/* 左（PC画像・少し小さめ） */}
+                  <div className="md:col-span-3">
+                    <div className="relative shadow-sm p-2">
+                      <div className="bg-white rounded-lg h-[16rem] sm:h-[20rem] lg:h-[24rem] flex items-center justify-center overflow-hidden">
+                        <Image
+                          src="/works/petcommon/desktop.png"
+                          alt="Pet Commons PC"
+                          width={1000}
+                          height={600}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 右（スマホ画像・少し小さめ） */}
+                  <div className="md:col-span-2">
+                    <div className="relative shadow-sm p-3 max-w-xs mx-auto">
+                      {/* スマホ枠の上下バーも小さめ */}
+                      <div className="h-4 flex items-center justify-center mb-2">
+                        <span className="w-16 h-1 bg-gray-200 rounded-full"></span>
+                      </div>
+                      <div className="bg-white rounded-xl overflow-hidden">
+                        <Image
+                          src="/works/petcommon/mobile2.png"
+                          alt="Pet Commons Mobile"
+                          width={300}
+                          height={700}
+                          className="w-full h-auto"
+                        />
+                      </div>
+                      <div className="flex items-center justify-center mt-2">
+                        <span className="w-16 h-1 bg-gray-200 rounded-full"></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="project-details">
-              <div className="bg-[#F9F9F9] rounded-lg p-6 mb-8">
-                <h2 className="text-xl font-semibold text-[#333] mb-4">プロジェクト概要</h2>
-                <div className="space-y-4">
-                  <div className="flex flex-col sm:flex-row">
-                    <span className="font-medium text-[#333] min-w-24 mb-1 sm:mb-0">使用言語:</span>
-                    <span className="text-gray-700">HTML, CSS, JavaScript, PHP, Laravel</span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row">
-                    <span className="font-medium text-[#333] min-w-24 mb-1 sm:mb-0">ターゲット:</span>
-                    <span className="text-gray-700">中小企業の小規模ECサイト運営者</span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row">
-                    <span className="font-medium text-[#333] min-w-24 mb-1 sm:mb-0">意識したこと:</span>
-                    <span className="text-gray-700">レスポンシブデザインと高速表示、直感的なUI/UX</span>
-                  </div>
-                </div>
-              </div>
 
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-[#333] mb-4">参考ポートフォリオ例</h2>
-                <div className="space-y-4">
-                  <div className="border-l-4 border-[#3be7ed] pl-4">
-                    <h3 className="font-medium text-[#333] mb-1">MALLOC Lab Portfolio</h3>
-                    <p className="text-gray-600 text-sm mb-2">ダイナミックなインタラクションとビジュアルアニメーション</p>
-                    <a href="https://example.com/malloc" className="text-[#3be7ed] hover:text-[#2dd4da] text-sm inline-flex items-center">
-                      サイトを見る
-                      <i className="ri-external-link-line ml-1"></i>
-                    </a>
+            {/* ===== 開発の流れ ===== */}
+            <div className="mb-5">
+              <h2 className="text-xl text-[#333] mb-6">開発の流れ</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-[#3be7ed] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i className="ri-lightbulb-line text-white text-xl"></i>
                   </div>
-                  <div className="border-l-4 border-[#3be7ed] pl-4">
-                    <h3 className="font-medium text-[#333] mb-1">Sophies Developer Site</h3>
-                    <p className="text-gray-600 text-sm mb-2">クリーンなレイアウトと詳細なプロジェクトケーススタディ</p>
-                    <a href="https://example.com/sophie" className="text-[#3be7ed] hover:text-[#2dd4da] text-sm inline-flex items-center">
-                      サイトを見る
-                      <i className="ri-external-link-line ml-1"></i>
-                    </a>
+                  <h3 className="font-semibold text-[#333] mb-2">設計</h3>
+                  <p className="text-gray-600 text-sm">
+                    紙ラフ &amp; ブラウザで直接プロトタイピング（モバイルファースト）
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-[#3be7ed] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i className="ri-code-line text-white text-xl"></i>
                   </div>
+                  <h3 className="font-semibold text-[#333] mb-2">開発・実装</h3>
+                  <p className="text-gray-600 text-sm">
+                    HTML / CSS / JavaScript。スムーズスクロール、Intersection Observer、ハンバーガー、スライダー
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-[#3be7ed] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i className="ri-rocket-line text-white text-xl"></i>
+                  </div>
+                  <h3 className="font-semibold text-[#333] mb-2">公開</h3>
+                  <p className="text-gray-600 text-sm">Vercel によるホスティング・プレビュー・本番公開</p>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="bg-[#F9F9F9] rounded-lg p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-[#333] mb-6">開発の流れ</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-[#3be7ed] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <i className="ri-lightbulb-line text-white text-xl"></i>
-                </div>
-                <h3 className="font-semibold text-[#333] mb-2">企画・設計</h3>
-                <p className="text-gray-600 text-sm">ユーザーニーズの分析とワイヤーフレーム作成</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-[#3be7ed] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <i className="ri-code-line text-white text-xl"></i>
-                </div>
-                <h3 className="font-semibold text-[#333] mb-2">開発・実装</h3>
-                <p className="text-gray-600 text-sm">レスポンシブデザインでのコーディング</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-[#3be7ed] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <i className="ri-rocket-line text-white text-xl"></i>
-                </div>
-                <h3 className="font-semibold text-[#333] mb-2">テスト・公開</h3>
-                <p className="text-gray-600 text-sm">パフォーマンス最適化とデプロイ</p>
+            {/* ===== 詳細 ===== */}
+            <div className="bg-white p-8">
+              <div className="grid grid-cols-1 gap-6">
+                <InfoBlock title="ターゲット">
+                  アニマルケアや暮らしの知見を素早く知りたい飼い主。ライト層でも迷わず情報に到達できる導線を重視。
+                </InfoBlock>
+
+                <InfoBlock title="課題">
+                  知見がSNSや掲示板に分散して見つけづらい。検索条件と情報の整理が必要。
+                </InfoBlock>
+
+                <InfoBlock title="目的">
+                  種類・年齢・テーマで迷子にならない導線設計の検証。操作時の気持ちよさも重視。
+                </InfoBlock>
+
+                <InfoBlock title="使用言語 / 技術">
+                  HTML / CSS / JavaScript / Intersection Observer / Vercel
+                </InfoBlock>
+
+                <InfoBlock title="デザイン・実装上の工夫">
+                  モバイルファーストで実装し、PCでは左サイド固定ナビを追加。  
+                  スムーズスクロール + アクティブ状態の視覚化（足跡アイコンの濃淡切替）。  
+                  画像は遅延読込・装飾はCSS/JSアニメーションで軽量化。
+                </InfoBlock>
               </div>
             </div>
-          </div>
 
-          <div className="bg-white border border-gray-200 rounded-lg p-8">
-            <h2 className="text-2xl font-semibold text-[#333] mb-6">技術的な特徴</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="font-semibold text-[#333] mb-3 flex items-center">
-                  <i className="ri-smartphone-line text-[#3be7ed] mr-2"></i>
-                  レスポンシブデザイン
-                </h3>
-                <p className="text-gray-600 text-sm">デスクトップからモバイルまで、あらゆるデバイスで最適な表示を実現</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-[#333] mb-3 flex items-center">
-                  <i className="ri-speed-line text-[#3be7ed] mr-2"></i>
-                  高速表示
-                </h3>
-                <p className="text-gray-600 text-sm">画像最適化とキャッシュ機能により、ページ読み込み時間を大幅に短縮</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-[#333] mb-3 flex items-center">
-                  <i className="ri-user-line text-[#3be7ed] mr-2"></i>
-                  直感的なUI/UX
-                </h3>
-                <p className="text-gray-600 text-sm">ユーザーの導線を考慮したインターフェース設計</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-[#333] mb-3 flex items-center">
-                  <i className="ri-shield-check-line text-[#3be7ed] mr-2"></i>
-                  セキュリティ対策
-                </h3>
-                <p className="text-gray-600 text-sm">SSL暗号化とセキュアなデータ処理を実装</p>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
 
-export function generateStaticParams() {
-  return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
-    { id: '5' },
-    { id: '6' },
-  ];
+/** 補助: セクション用の小コンポーネント（ページ内定義でもOK） */
+function InfoBlock({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mb-4">
+      <h3 className={`font-semibold text-[#333] mb-3 flex items-center ${styles.hoverIcon}`}>
+        <i className={`ri-leaf-line text-[#3bc3ed] mr-2 ${styles.icon}`}></i>
+        <span className="text-[#3bc3ed]">{title}</span>
+      </h3>
+      <p className="text-gray-600 text-sm leading-relaxed">{children}</p>
+    </div>
+  );
 }

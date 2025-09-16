@@ -15,7 +15,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'works', label: 'Works' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavigate = (id: string) => {
@@ -27,10 +27,20 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
     <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="logo flex items-center">
-            <Image src="/natomi.png" alt="logo" width={32} height={32} className="h-8 w-8" />
-            <h1 className="text-base md:text-2xl font-bold text-[#3be7ed] ms-2"></h1>
-          </div>
+          {/* ロゴ（TOPリンク付き、左端に寄せる） */}
+          <button
+            onClick={() => handleNavigate('top')}
+            aria-label="トップページへ"
+            className="flex items-center space-x-2 focus:outline-none"
+          >
+            <Image
+              src="/natomi.png"
+              alt="logo"
+              width={40}
+              height={40}
+              className="h-10 w-10"
+            />
+          </button>
 
           {/* PCナビゲーション */}
           <nav className="hidden md:flex space-x-8">
@@ -52,7 +62,10 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
 
           {/* スマホメニューアイコン */}
           <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="メニューを開く">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="メニューを開く"
+            >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
