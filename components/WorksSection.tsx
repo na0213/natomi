@@ -87,25 +87,25 @@ export default function WorksSection() {
             <p className="text-lg text-[#86888a] font-bold">{w.category}</p>
           {w.id === '3' ? (
             // ===== id=3：画像3枚のスタイリッシュレイアウト =====
-            <Link href={`/works/${w.id}`} className="block">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* 左：縦に2枚 */}
-                <div className="grid grid-rows-2 gap-4 md:col-span-1">
-                  <Image
-                    src="/works/portfolio/mobile.png" // ←1枚目
-                    alt={`${w.title} モバイル画面`}
-                    width={300}
-                    height={400}
-                    className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
-                  />
-                  <Image
-                    src="/works/portfolio/mobile2.png" // ←2枚目
-                    alt={`${w.title} モバイル画面 2`}
-                    width={300}
-                    height={400}
-                    className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
-                  />
-                </div>
+<Link href={`/works/${w.id}`} className="block">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* 左：モバイルでは横並び2枚、PCでは縦並び */}
+      <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:col-span-1">
+        <Image
+          src="/works/portfolio/mobile.png"
+          alt={`${w.title} モバイル画面`}
+          width={300}
+          height={400}
+          className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+        />
+        <Image
+          src="/works/portfolio/mobile2.png"
+          alt={`${w.title} モバイル画面 2`}
+          width={300}
+          height={400}
+          className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+        />
+      </div>
 
                 {/* 右：大きな1枚 */}
                 <div className="md:col-span-2">
