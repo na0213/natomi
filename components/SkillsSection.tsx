@@ -22,7 +22,7 @@ export default function SkillsSection() {
       id: 'php',
       name: 'PHP（Laravel）',
       icon: 'ri-code-s-slash-line',
-      description: 'Laravelを使ったWebサイト開発経験',
+      description: 'Laravelを使ったWebサイト開発経験。API設計やGmail APIとの連携も実装',
     },
     {
       id: 'reactnext',
@@ -53,7 +53,7 @@ export default function SkillsSection() {
   return (
     <section id="skills" className="py-20 bg-white scroll-mt-24">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-16 text-[#333]">で　き　る　こ　と</h2>
+        <h2 className="text-3xl text-center mb-16 text-[#333]">で　き　る　こ　と</h2>
 
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -37,7 +37,7 @@ const works: WorkItem[] = [
     id: '2',
     title: 'Pet Commons（試作）',
     description: 'Webサイト，自主制作',
-    category: 'LP',
+    category: 'LP(ランディングページ)',
     videoSrc: '/works/petcommon/petcommon.mp4',
     mockups: {
       mobile: '/works/1/mobile.png',
@@ -78,34 +78,34 @@ export default function WorksSection() {
   return (
     <section id="works" className="py-20 bg-[#F5F5F5] scroll-mt-24">
       <div className="container mx-auto px-4 space-y-16">
-        <h2 className="text-3xl font-bold text-center text-[#333] tracking-widest">
+        <h2 className="text-3xl text-center text-[#333] tracking-widest">
           さ　く　ひ　ん
         </h2>
 
         {normal.map(w => (
           <div key={w.id} className="space-y-4">
-            <p className="text-lg text-[#86888a] font-bold">{w.category}</p>
+            <p className="text-lg text-[#86888a] font-bold md:text-xl">{w.category}</p>
           {w.id === '3' ? (
             // ===== id=3：画像3枚のスタイリッシュレイアウト =====
-<Link href={`/works/${w.id}`} className="block">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {/* 左：モバイルでは横並び2枚、PCでは縦並び */}
-      <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:col-span-1">
-        <Image
-          src="/works/portfolio/mobile.png"
-          alt={`${w.title} モバイル画面`}
-          width={300}
-          height={400}
-          className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
-        />
-        <Image
-          src="/works/portfolio/mobile2.png"
-          alt={`${w.title} モバイル画面 2`}
-          width={300}
-          height={400}
-          className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
-        />
-      </div>
+            <Link href={`/works/${w.id}`} className="block">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* 左：モバイルでは横並び2枚、PCでは縦並び */}
+                  <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:col-span-1">
+                    <Image
+                      src="/works/portfolio/mobile.png"
+                      alt={`${w.title} モバイル画面`}
+                      width={300}
+                      height={400}
+                      className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+                    />
+                    <Image
+                      src="/works/portfolio/mobile2.png"
+                      alt={`${w.title} モバイル画面 2`}
+                      width={300}
+                      height={400}
+                      className="w-full h-auto object-cover rounded md:max-w-[80%] md:mx-auto"
+                    />
+                  </div>
 
                 {/* 右：大きな1枚 */}
                 <div className="md:col-span-2">
@@ -177,7 +177,7 @@ export default function WorksSection() {
 
             {/* タイトル & 説明（共通で残す場合） */}
             <div className="px-2 md:px-0">
-              <h3 className="text-xl text-[#333]">{w.title}</h3>
+              <h3 className="text-base text-[#333] md:text-lg">{w.title}</h3>
               <p className="text-sm text-gray-600">{w.description}</p>
             </div>
           </div>

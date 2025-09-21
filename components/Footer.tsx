@@ -12,8 +12,16 @@ export default function Footer() {
           {/* ロゴ＆プロフィール */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-3">
-              <Image src="/natomi.png" alt="natomi logo" width={28} height={28} className="h-7 w-7 md:h-8 md:w-8" />
-              <h2 className="text-lg md:text-xl font-bold text-[#3be7ed] ms-2"></h2>
+            <a href="#top" className="flex items-center">
+                <Image
+                  src="/natomi.png"
+                  alt="natomi logo"
+                  width={28}
+                  height={28}
+                  className="h-7 w-7 md:h-8 md:w-8 cursor-pointer hover:opacity-80 transition"
+                />
+                <h2 className="text-lg md:text-xl font-bold text-[#3be7ed] ms-2"></h2>
+              </a>
             </div>
             <p className="text-[#696969] mb-4 leading-relaxed">
               最近は生成AIをつかいながら日々開発を楽しんでいます。<br />
@@ -79,7 +87,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center">
                 <i className="ri-map-pin-line mr-2" />
-                <span>Tokyo, Japan</span>
+                <span>Kanagawa, Japan</span>
               </div>
             </div>
           </div>

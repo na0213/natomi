@@ -42,7 +42,7 @@ const TIMELINE_ITEMS: RawItem[] = [
   { side: 'right', period: '2022年', range: ['2022/04', '2022/12'], role: 'SAMURAI ENGINEER エキスパートコース', description: 'HTML/CSS/PHP/Laravel を学習' },
   { side: 'left',  period: '2017年〜2024年', range: ['2017/04', '2024/03'], role: '物流・品質管理', description: '化粧品・健康食品メーカーにて品質管理、物流改善に従事' },
   { side: 'right', period: '〜2008年', when: '2008/03', role: '生物資源科学 修士', description: '遺伝学（鯨類胎盤の女性ホルモン解析）' },
-  { side: 'left',  period: '2015年〜2017年', range: ['2015/04', '2017/03'], role: '研究補助・秘書', description: '大学病院での研究支援・秘書業務' },
+  { side: 'left',  period: '2015年〜2017年', range: ['2015/04', '2017/03'], role: '研究補助・秘書', description: '大学病院での研究補助・秘書業務' },
 ];
 
 /* =========================
@@ -123,7 +123,7 @@ export default function AboutSection() {
     <section id="about" className="py-20 bg-[#F9F9F9] mt-16 scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-3xl font-bold text-center mb-16 text-[#333] flex items-center justify-center gap-2">
+          <h2 className="text-3xl text-center mb-16 text-[#333] flex items-center justify-center gap-2">
             わ た し の こ と
             <span className="flex items-center gap-1">
               <EyeAvatar size={16} pupilRatio={0.65} />
@@ -153,7 +153,7 @@ export default function AboutSection() {
                           <Image src="/icons/dolphin.png" alt="イルカアイコン" width={35} height={35} className="drop-shadow-md" />
                         </span>
                       </span>
-                      の研究をしていました。
+                      の研究（遺伝学）をしていました。
                     </p>
 
                     <p>

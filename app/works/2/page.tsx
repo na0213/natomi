@@ -8,6 +8,7 @@ import styles from './page.module.css';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 
 export default function WorkPage1() {
   const router = useRouter();
@@ -22,10 +23,19 @@ export default function WorkPage1() {
           <div className="max-w-6xl mx-auto">
             {/* ===== ヘッダー部分の文言変更 ===== */}
             <div className="mb-8">
-            <button onClick={() => router.back()} className="inline-flex items-center text-[#3be7ed] hover:text-[#2dd4da] mb-4">
-              <i className="ri-arrow-left-line mr-2"></i>
-              戻る
+            <button
+              onClick={() => router.push("/#works")}
+              className="mb-4"
+            >
+              <Image
+                src="/icons/arrow.png"
+                alt="戻る"
+                width={52}
+                height={52}
+                className="cursor-pointer wiggleIcon"
+              />
             </button>
+
               <h1 className="text-3xl text-[#333] mb-2">Pet Commons（試作）</h1>
               <p className="text-gray-600">
                 モバイルファーストで作る、飼い主コミュニティのLPデモ（HTML/CSS/JS + Vercel）
@@ -46,18 +56,16 @@ export default function WorkPage1() {
               <div className="bg-[#F9F9F9] rounded-lg p-4 overflow-visible">
                 {/* PCモック（高さを大きく調整） */}
                 <div className="desktop-mockup mb-12">
-                  <div className="relative bg-[#ffffff] rounded-t-lg p-2">
-                    <div className="bg-white rounded h-[28rem] md:h-[34rem] lg:h-[42rem] flex items-center justify-center overflow-hidden">
-                      <Image
-                        src="/works/petcommon/mobile.png"
-                        alt="Pet Commons Desktop"
-                        width={1600}
-                        height={1000}
-                        className="w-full h-full object-contain rounded"
-                        priority
-                      />
-                    </div>
-                  </div>
+                <div className="relative w-full p-2">
+                  <Image
+                    src="/works/petcommon/mobile.png"
+                    alt="Pet Commons Desktop"
+                    width={1600}
+                    height={1000}
+                    className="w-full h-auto object-cover rounded"
+                    priority
+                  />
+                </div>
                 </div>
 
                 {/* PC画像 + スマホ画像の2分割（6:4） */}
@@ -65,7 +73,7 @@ export default function WorkPage1() {
                   {/* 左（PC画像・少し小さめ） */}
                   <div className="md:col-span-3">
                     <div className="relative shadow-sm p-2">
-                      <div className="bg-white rounded-lg h-[16rem] sm:h-[20rem] lg:h-[24rem] flex items-center justify-center overflow-hidden">
+                      <div className="rounded-lg h-[16rem] sm:h-[20rem] lg:h-[24rem] flex items-center justify-center overflow-hidden">
                         <Image
                           src="/works/petcommon/desktop.png"
                           alt="Pet Commons PC"
@@ -82,9 +90,9 @@ export default function WorkPage1() {
                     <div className="relative shadow-sm p-3 max-w-xs mx-auto">
                       {/* スマホ枠の上下バーも小さめ */}
                       <div className="h-4 flex items-center justify-center mb-2">
-                        <span className="w-16 h-1 bg-gray-200 rounded-full"></span>
+                        <span className="w-16 h-1"></span>
                       </div>
-                      <div className="bg-white rounded-xl overflow-hidden">
+                      <div className="rounded-xl overflow-hidden">
                         <Image
                           src="/works/petcommon/mobile2.png"
                           alt="Pet Commons Mobile"
@@ -94,7 +102,7 @@ export default function WorkPage1() {
                         />
                       </div>
                       <div className="flex items-center justify-center mt-2">
-                        <span className="w-16 h-1 bg-gray-200 rounded-full"></span>
+                        <span className="w-16 h-1"></span>
                       </div>
                     </div>
                   </div>
@@ -122,7 +130,7 @@ export default function WorkPage1() {
                   </div>
                   <h3 className="font-semibold text-[#333] mb-2">開発・実装</h3>
                   <p className="text-gray-600 text-sm">
-                    HTML / CSS / JavaScript。スムーズスクロール、Intersection Observer、ハンバーガー、スライダー
+                    HTML / CSS / JavaScript。スムーズスクロール、ハンバーガー、スライダー
                   </p>
                 </div>
                 <div className="text-center">
@@ -151,7 +159,7 @@ export default function WorkPage1() {
                 </InfoBlock>
 
                 <InfoBlock title="使用言語 / 技術">
-                  HTML / CSS / JavaScript / Intersection Observer / Vercel
+                  HTML / CSS / JavaScript / Vercel
                 </InfoBlock>
 
                 <InfoBlock title="デザイン・実装上の工夫">
@@ -165,7 +173,7 @@ export default function WorkPage1() {
           </div>
         </div>
       </main>
-
+      <ScrollToTop />
       <Footer />
     </div>
   );
