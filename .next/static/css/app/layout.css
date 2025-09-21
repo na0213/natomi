@@ -1442,7 +1442,7 @@ html {
 }
 
 .animate-slow-bounce {
-  animation: slow-bounce 1.5s infinite;
+  animation: slow-bounce 1.4s infinite;
 }
 
 .focus-within\:shadow-md:focus-within{

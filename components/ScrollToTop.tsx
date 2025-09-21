@@ -28,8 +28,8 @@ export default function ScrollToTop() {
         <Image
           src="/icons/up.png"
           alt="上へ"
-          width={48}
-          height={48}
+          width={58}
+          height={58}
           className="animate-slow-bounce transform transition-transform duration-500 ease-in-out hover:scale-125"
         />
       </button>
