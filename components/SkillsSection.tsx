@@ -16,7 +16,7 @@ export default function SkillsSection() {
       id: 'javascript',
       name: 'JavaScript',
       icon: 'ri-javascript-line',
-      description: 'DOM操作や非同期処理を含むクライアントサイド開発が可能',
+      description: 'DOM操作や非同期通信（fetch/async-await）を用いたフォーム送信やデータ処理の実装経験',
     },
     {
       id: 'php',
