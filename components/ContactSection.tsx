@@ -64,17 +64,14 @@ export default function ContactSection() {
     setSubmitStatus('idle');
     
     try {
-      const response = await fetch('https://readdy.ai/api/form-submit', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          formId: 'contact-form',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          message: formData.message
-        })
+          message: formData.message,
+        }),
       });
       
       if (response.ok) {
