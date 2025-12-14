@@ -33,7 +33,7 @@ type RawItem = {
    データ
    ========================= */
 const TIMELINE_ITEMS: RawItem[] = [
-  { side: 'left',  period: '2025年〜', when: '2025/05', role: '事務', description: 'スポーツ協会の事務' },
+  { side: 'left',  period: '2026年〜', when: '2025/01', role: 'Web engineer', description: 'Webサイト、ECサイト制作' },
   { side: 'left',  period: '2024年〜', when: '2024/10', role: 'ライター', description: 'Webメディア・広報の取材執筆' },
   { side: 'right', period: '〜2025年', when: '2025/02', role: 'コミュニティマネージャー', description: '株式会社WHEREの地域バイヤープログラムにて、受講生とのコミュニケーション運営を担当' },
   { side: 'right', period: '2024年', when: '2024/10', role: 'インタビューライター養成講座修了', description: 'LOCAL LETTERにて、地域密着の取材・執筆を実践' },
