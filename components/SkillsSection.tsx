@@ -31,6 +31,13 @@ export default function SkillsSection() {
       description: 'コンポーネント設計やAPI連携を含むフロントエンド開発経験',
     },
     {
+      id: 'aws',
+      name: 'AWS（インフラ / サーバレス）',
+      icon: 'ri-cloud-line',
+      description:
+        'Lambda / CloudFront / Route 53 / API Gateway / S3 を用いたサーバレス構成の構築、EC2を用いた簡易サーバー構築も可能',
+    },
+    {
       id: 'writing',
       name: 'ライティング',
       icon: 'ri-pencil-line',

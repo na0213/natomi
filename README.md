@@ -1,30 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌿 Portfolio Site
 
-## Getting Started
+Natomi のポートフォリオサイトです。  
+Webエンジニア / ライターとしての活動内容・制作実績・スキルをまとめています。
 
-First, run the development server:
+🔗 https://www.natomi.work/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Framework
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Styling
+- Tailwind CSS
+- CSS Modules
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- スクロールアニメーション
+- スキルセクション（ホバーで詳細表示）
+- Aboutセクション（モーダルカード表示）
+- タイムライン（キャリア履歴）
+- Google Map埋め込み
+- お問い合わせフォーム（メール送信機能）
+- レスポンシブ対応
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
+
+## 🧠 設計意図
+
+- **Next.js App Router** を採用し、将来的な拡張性を考慮
+- コンポーネント分割により再利用性を意識
+- Tailwindで高速なUI構築
+- 動的表示部分のみ `use client` を使用し最適化
+- 画像は最適化・プリロードによりUX向上
+
+---

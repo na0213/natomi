@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import { Briefcase, GraduationCap, Plus, X } from 'lucide-react';
 import styles from './AboutSection.module.css';
 import EyeAvatar from '@/components/EyeAvatar';
@@ -33,7 +33,7 @@ type RawItem = {
    データ
    ========================= */
 const TIMELINE_ITEMS: RawItem[] = [
-  // { side: 'left',  period: '2026年〜', when: '2026/01', role: 'Web engineer', description: 'Webサイト、ECサイト制作' },
+  { side: 'left',  period: '2026年〜', when: '2026/01', role: 'Web engineer', description: 'AWSサーバレスサイト制作' },
   { side: 'left',  period: '2024年〜', when: '2024/10', role: 'ライター', description: 'Webメディア・広報の取材執筆' },
   { side: 'right', period: '〜2025年', when: '2025/02', role: 'コミュニティマネージャー', description: '株式会社WHEREの地域バイヤープログラムにて、受講生とのコミュニケーション運営を担当' },
   { side: 'right', period: '2024年', when: '2024/10', role: 'インタビューライター養成講座修了', description: 'LOCAL LETTERにて、地域密着の取材・執筆を実践' },
@@ -104,11 +104,20 @@ export default function AboutSection() {
   ];
   const closeBgByIndex = ['/icons/pink.png', '/icons/blue.png', '/icons/green.png', '/icons/yellow.png'];
 
+  // ✅ 追加：画像を先読みする関数（ボタン hover/focus 用）
+  const preload = (src: string) => {
+    // 念のため（SSR対策）
+    if (typeof window === 'undefined') return;
+    const img = new Image();
+    img.src = src;
+  };
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpenCard(null); };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
+
   useEffect(() => {
     const ob = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) setIsVisible(true);
@@ -116,6 +125,21 @@ export default function AboutSection() {
     const el = document.getElementById('about');
     if (el) ob.observe(el);
     return () => ob.disconnect();
+  }, []);
+
+  // ✅ 追加：このセクションが表示されたら4枚まとめて先読み（初回クリックの遅さ対策）
+  useEffect(() => {
+    const srcs = [
+      '/about/ferret.png',
+      '/about/run.png',
+      '/about/trip.png',
+      '/about/fish.png',
+    ];
+
+    srcs.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
 
   /* ========= JSX ========= */
@@ -136,8 +160,13 @@ export default function AboutSection() {
             <div className="bg-white p-8 rounded-lg shadow-sm">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                 <div className="flex-shrink-0">
-                  <Image src="/natomi.png" alt="プロフィール写真" width={128} height={128}
-                    className="rounded-full object-cover object-top border-2 border-[#09dbd0]" />
+                  <NextImage
+                    src="/natomi.png"
+                    alt="プロフィール写真"
+                    width={128}
+                    height={128}
+                    className="rounded-full object-cover object-top border-2 border-[#09dbd0]"
+                  />
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-2xl font-bold text-[#333] mb-4">N a t o m i</h3>
@@ -148,9 +177,11 @@ export default function AboutSection() {
                         <span className={`${darumadrop.className} text-[#06becf] align-baseline text-[1.15em] md:text-[1.2em] transition-all duration-300 group-hover:text-[1.3em] md:group-hover:text-[1.4em]`}>
                           イルカ
                         </span>
-                        <span aria-hidden
-                          className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100">
-                          <Image src="/icons/dolphin.png" alt="イルカアイコン" width={35} height={35} className="drop-shadow-md" />
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100"
+                        >
+                          <NextImage src="/icons/dolphin.png" alt="イルカアイコン" width={35} height={35} className="drop-shadow-md" />
                         </span>
                       </span>
                       の研究（遺伝学）をしていました。
@@ -161,14 +192,28 @@ export default function AboutSection() {
                       現在は{' '}
                       <span className="relative inline-block group align-baseline">
                         <span className={`${darumadrop.className} text-[#06becf] align-baseline text-[1.15em] md:text-[1.2em] transition-all duration-300 group-hover:text-[1.3em] md:group-hover:text-[1.4em]`}>
-                          ライター
+                          Webエンジニア
                         </span>
-                        <span aria-hidden
-                          className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100">
-                          <Image src="/icons/pen.png" alt="ペンアイコン" width={35} height={35} className="drop-shadow-md" />
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100"
+                        >
+                          <NextImage src="/icons/pc.png" alt="PCアイコン" width={35} height={35} className="drop-shadow-md" />
                         </span>
                       </span>
-                      としても活動しています。
+                      と{' '}
+                      <span className="relative inline-block group align-baseline">
+                        <span className={`${darumadrop.className} text-[#06becf] align-baseline text-[1.15em] md:text-[1.2em] transition-all duration-300 group-hover:text-[1.3em] md:group-hover:text-[1.4em]`}>
+                          ライター
+                        </span>
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100"
+                        >
+                          <NextImage src="/icons/pen.png" alt="ペンアイコン" width={35} height={35} className="drop-shadow-md" />
+                        </span>
+                      </span>
+                      として活動しています。
                     </p>
 
                     <p>
@@ -178,9 +223,11 @@ export default function AboutSection() {
                         <span className={`${darumadrop.className} text-[#06becf] align-baseline text-[1.15em] md:text-[1.2em] transition-all duration-300 group-hover:text-[1.3em] md:group-hover:text-[1.4em]`}>
                           心が動く
                         </span>
-                        <span aria-hidden
-                          className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100">
-                          <Image src="/icons/heart.png" alt="♡アイコン" width={35} height={35} className="drop-shadow-md" />
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute -top-8 -right-8 opacity-0 scale-75 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100"
+                        >
+                          <NextImage src="/icons/heart.png" alt="♡アイコン" width={35} height={35} className="drop-shadow-md" />
                         </span>
                       </span>
                       ”ようなWebサービスをつくることを目指しています。
@@ -203,13 +250,18 @@ export default function AboutSection() {
           <div className="max-w-6xl mx-auto mb-16">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {cards.map((c, i) => (
-                <article key={i} className="group relative bg-white rounded-lg shadow-sm border border-gray-100 p-4 md:p-6 h-full transition-shadow hover:shadow-md focus-within:shadow-md">
+                <article
+                  key={i}
+                  className="group relative bg-white rounded-lg shadow-sm border border-gray-100 p-4 md:p-6 h-full transition-shadow hover:shadow-md focus-within:shadow-md"
+                >
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="text-base font-semibold text-[#333]">{c.title}</h4>
 
                     <button
                       type="button"
                       aria-label={`${c.title} の詳細を開く`}
+                      onMouseEnter={() => preload(c.img)}   // ✅ 追加：ホバーで先読み
+                      onFocus={() => preload(c.img)}        // ✅ 追加：キーボード操作でも先読み
                       onClick={() => setOpenCard(i)}
                       className="group/close relative inline-flex items-center justify-center w-10 h-10 rounded-full focus:outline-none focus:ring-2 focus:ring-[#09dbd0]/30"
                     >
@@ -257,7 +309,7 @@ export default function AboutSection() {
 
                 <div className="absolute -top-8 -left-4">
                   <div className={`relative w-24 h-24 sm:w-24 sm:h-24 rounded-xl overflow-hidden ${styles.popIn}`}>
-                    <Image
+                    <NextImage
                       src={cards[openCard].img}
                       alt={`${cards[openCard].title} のイメージ`}
                       fill
@@ -278,10 +330,10 @@ export default function AboutSection() {
           {/* スマホ：1カラム（しごと → かつどう） */}
           <div className="max-w-6xl mx-auto md:hidden">
             {/* しごと */}
-          <h3 className="flex items-center justify-start text-base font-bold text-gray-700 mb-3">
-            <img src="/icons/pink.png" alt="" aria-hidden="true" className="inline-block w-5 h-5 mr-2" />
-            しごと
-          </h3>
+            <h3 className="flex items-center justify-start text-base font-bold text-gray-700 mb-3">
+              <img src="/icons/pink.png" alt="" aria-hidden="true" className="inline-block w-5 h-5 mr-2" />
+              しごと
+            </h3>
             <div className="space-y-5">
               {timelineItems.filter(i => i.side === 'left').map((it) => (
                 <div key={`${it.period}-${it.title}`}>
@@ -308,7 +360,6 @@ export default function AboutSection() {
               ))}
             </div>
           </div>
-
 
           {/* PC：左右（本番年表） */}
           <div className="max-w-6xl mx-auto hidden md:block">
