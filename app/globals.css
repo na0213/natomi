@@ -7,6 +7,11 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: #ffffff;
+  color: #243033;
+}
+
 ::selection {
   background: #3be7ed33; /* brand with transparency */
 }
@@ -46,3 +51,15 @@ html {
   animation: slow-bounce 1.4s infinite;
 }
 
+@keyframes ai-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ai-marquee-track {
+  animation: ai-marquee 34s linear infinite;
+}
+
+.ai-marquee-track:hover {
+  animation-play-state: paused;
+}

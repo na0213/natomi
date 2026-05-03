@@ -29,7 +29,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://x.com/natsugoro___"
+                href="https://x.com/iIongPI6cAUuAWu"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gray-400 hover:text-[#3be7ed] transition-colors"
@@ -87,7 +87,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center">
                 <i className="ri-map-pin-line mr-2" />
-                <span>Kanagawa, Japan</span>
+                <span>Japan</span>
               </div>
             </div>
           </div>

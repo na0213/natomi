@@ -35,14 +35,14 @@ type RawItem = {
 const TIMELINE_ITEMS: RawItem[] = [
   { side: 'left',  period: '2026年〜', when: '2026/01', role: 'Web engineer', description: 'AWSサーバレスサイト制作' },
   { side: 'left',  period: '2024年〜', when: '2024/10', role: 'ライター', description: 'Webメディア・広報の取材執筆' },
-  { side: 'right', period: '〜2025年', when: '2025/02', role: 'コミュニティマネージャー', description: '株式会社WHEREの地域バイヤープログラムにて、受講生とのコミュニケーション運営を担当' },
-  { side: 'right', period: '2024年', when: '2024/10', role: 'インタビューライター養成講座修了', description: 'LOCAL LETTERにて、地域密着の取材・執筆を実践' },
-  { side: 'right', period: '2024年', when: '2024/06', role: '地域バイヤープログラム修了', description: '株式会社WHEREにて、生産者訪問〜仕入れ〜AKOMEYA TOKYOでのPOPUP販売までを実践' },
-  { side: 'right', period: '2023年〜2024年', range: ['2023/04', '2024/03'], role: "G'sアカデミー Devコース", description: 'HTML/CSS/PHP/Laravel、Next.js/React などを学習' },
-  { side: 'right', period: '2022年', range: ['2022/04', '2022/12'], role: 'SAMURAI ENGINEER エキスパートコース', description: 'HTML/CSS/PHP/Laravel を学習' },
-  { side: 'left',  period: '2017年〜2024年', range: ['2017/04', '2024/03'], role: '物流・品質管理', description: '化粧品・健康食品メーカーにて品質管理、物流改善に従事' },
-  { side: 'right', period: '〜2008年', when: '2008/03', role: '生物資源科学 修士', description: '遺伝学（鯨類胎盤の女性ホルモン解析）' },
-  { side: 'left',  period: '2015年〜2017年', range: ['2015/04', '2017/03'], role: '研究補助・秘書', description: '大学病院での研究補助・秘書業務' },
+  { side: 'right', period: '〜2025年', when: '2025/02', role: 'コミュニティマネージャー', description: '地域関連プログラムで、受講生とのコミュニケーション運営を担当' },
+  { side: 'right', period: '2024年', when: '2024/10', role: 'インタビューライター講座修了', description: '地域密着の取材・執筆を実践' },
+  { side: 'right', period: '2024年', when: '2024/06', role: '地域関連プログラム修了', description: '生産者訪問から販売企画まで、地域の魅力を届ける流れを実践' },
+  { side: 'right', period: '2023年〜2024年', range: ['2023/04', '2024/03'], role: 'Web開発スクール', description: 'HTML/CSS/PHP/Laravel、Next.js/React などを学習' },
+  { side: 'right', period: '2022年', range: ['2022/04', '2022/12'], role: 'プログラミング講座', description: 'HTML/CSS/PHP/Laravel を学習' },
+  { side: 'left',  period: '2017年〜2024年', range: ['2017/04', '2024/03'], role: '物流・品質管理', description: 'メーカーで品質管理、物流改善に従事' },
+  { side: 'right', period: '〜2008年', when: '2008/03', role: '生物系 修士', description: '海洋生物に関する遺伝学研究' },
+  { side: 'left',  period: '2015年〜2017年', range: ['2015/04', '2017/03'], role: '研究補助・秘書', description: '研究機関での研究補助・秘書業務' },
 ];
 
 /* =========================
@@ -97,7 +97,7 @@ export default function AboutSection() {
 
   const timelineItems = useMemo(() => toTimelineItems(TIMELINE_ITEMS), []);
   const cards = [
-    { title: 'Animal',  modal: 'フェレットと暮らしています。イヌ、ネコ、イルカ、ペンギン、ナマケモノなどなど、動物はだいたい好きです。', img: '/about/ferret.png' },
+    { title: 'Animal',  modal: '動物のいる暮らしが好きです。イヌ、ネコ、イルカ、ペンギン、ナマケモノなどなど、動物はだいたい好きです。', img: '/about/ferret.png' },
     { title: 'Running', modal: '時間があると川沿いを走ります。トレイルランニングで色々な山も走っています。', img: '/about/run.png' },
     { title: 'Travel',  modal: '地域の魅力を知る旅がすき。温泉やオーベルジュにこだわりのある宿探しをしています。', img: '/about/trip.png' },
     { title: 'Fishing', modal: '主に海釣り。アジからタイや本ガツオまで。魚は自ら捌いていただいています。', img: '/about/fish.png' },
@@ -144,20 +144,23 @@ export default function AboutSection() {
 
   /* ========= JSX ========= */
   return (
-    <section id="about" className="py-20 bg-[#F9F9F9] mt-16 scroll-mt-24">
+    <section id="about" className="py-20 bg-white scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-3xl text-center mb-16 text-[#333] flex items-center justify-center gap-2">
-            わ た し の こ と
-            <span className="flex items-center gap-1">
-              <EyeAvatar size={16} pupilRatio={0.65} />
-              <EyeAvatar size={16} pupilRatio={0.65} />
-            </span>
-          </h2>
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="mb-3 text-xs font-bold tracking-[0.22em] text-[#08aeb8]">ABOUT</p>
+            <h2 className="text-3xl text-[#243033] flex items-center justify-center gap-2">
+              わたしのこと
+              <span className="flex items-center gap-1">
+                <EyeAvatar size={16} pupilRatio={0.65} />
+                <EyeAvatar size={16} pupilRatio={0.65} />
+              </span>
+            </h2>
+          </div>
 
           {/* プロフィール */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="bg-white p-8 rounded-lg shadow-sm">
+          <div className="max-w-5xl mx-auto mb-16">
+            <div className="bg-[#f6fbfb] p-6 shadow-sm ring-1 ring-[#dce8e8] md:p-8">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                 <div className="flex-shrink-0">
                   <NextImage
@@ -165,11 +168,12 @@ export default function AboutSection() {
                     alt="プロフィール写真"
                     width={128}
                     height={128}
-                    className="rounded-full object-cover object-top border-2 border-[#09dbd0]"
+                    className="rounded-full object-cover object-top border-2 border-[#09dbd0] shadow-sm"
                   />
                 </div>
                 <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-2xl font-bold text-[#333] mb-4">N a t o m i</h3>
+                  <p className="mb-2 text-xs font-bold tracking-[0.18em] text-[#08aeb8]">WEB ENGINEER / WRITER</p>
+                  <h3 className="text-2xl font-bold text-[#243033] mb-4">Natomi</h3>
                   <div className="space-y-4 text-gray-700">
                     <p>
                       小さい頃から動物が大好き。大学では海洋学を専攻し、クジラや{' '}
@@ -184,11 +188,11 @@ export default function AboutSection() {
                           <NextImage src="/icons/dolphin.png" alt="イルカアイコン" width={35} height={35} className="drop-shadow-md" />
                         </span>
                       </span>
-                      の研究（遺伝学）をしていました。
+                      に関する遺伝学研究をしていました。
                     </p>
 
                     <p>
-                      仕事は事務や大学病院での研究補助、化粧品・健康食品メーカーで物流管理や品質管理の仕事を経験。<br />
+                      仕事は事務や研究補助、メーカーでの物流管理や品質管理を経験。<br />
                       現在は{' '}
                       <span className="relative inline-block group align-baseline">
                         <span className={`${darumadrop.className} text-[#06becf] align-baseline text-[1.15em] md:text-[1.2em] transition-all duration-300 group-hover:text-[1.3em] md:group-hover:text-[1.4em]`}>
@@ -233,12 +237,12 @@ export default function AboutSection() {
                       ”ようなWebサービスをつくることを目指しています。
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
-                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># ライティング</span>
-                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># 開発</span>
-                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># 生成AI</span>
-                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># WebAR</span>
-                      <span className="px-3 py-1 text-[#09dbd0] font-bold text-sm"># 食品衛生責任者</span>
+                    <div className="flex flex-wrap gap-2 mt-5 justify-center md:justify-start">
+                      <span className="border border-[#bce9eb] bg-white px-3 py-1 text-[#078d95] font-bold text-sm"># ライティング</span>
+                      <span className="border border-[#bce9eb] bg-white px-3 py-1 text-[#078d95] font-bold text-sm"># 開発</span>
+                      <span className="border border-[#bce9eb] bg-white px-3 py-1 text-[#078d95] font-bold text-sm"># 生成AI</span>
+                      <span className="border border-[#bce9eb] bg-white px-3 py-1 text-[#078d95] font-bold text-sm"># WebAR</span>
+                      <span className="border border-[#bce9eb] bg-white px-3 py-1 text-[#078d95] font-bold text-sm"># 地域</span>
                     </div>
                   </div>
                 </div>

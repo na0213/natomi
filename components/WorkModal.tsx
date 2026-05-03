@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 
 interface WorkModalProps {
   isOpen: boolean;
@@ -14,6 +15,8 @@ interface WorkModalProps {
 
 export default function WorkModal({ isOpen, onClose, work }: WorkModalProps) {
   if (!isOpen || !work) return null;
+  const isImage = /\.(png|jpe?g|webp|gif|avif)$/i.test(work.modalMedia);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
       <div className="bg-white rounded-lg max-w-xl w-full p-6 relative animate-fade-in">
@@ -23,14 +26,25 @@ export default function WorkModal({ isOpen, onClose, work }: WorkModalProps) {
         >
           ×
         </button>
-        <div className="relative w-full h-56 sm:h-64 mb-4">
-          <video
-            src={work.modalMedia}
-            autoPlay
-            loop
-            muted
-            className="w-full h-full object-cover rounded"
-          />
+        <div className="relative mb-4 h-64 w-full overflow-hidden rounded bg-[#f6fbfb] sm:h-80">
+          {isImage ? (
+            <Image
+              src={work.modalMedia}
+              alt={`${work.title} の作品画像`}
+              fill
+              sizes="(min-width: 640px) 576px, calc(100vw - 32px)"
+              className="object-contain"
+            />
+          ) : (
+            <video
+              src={work.modalMedia}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-full w-full object-contain"
+            />
+          )}
         </div>
         <h2 className="text-xl font-bold mb-2 text-[#3be7ed]">{work.title}</h2>
         <p className="text-sm text-gray-600 mb-1">

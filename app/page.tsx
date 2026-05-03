@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('about');
+  const [activeSection, setActiveSection] = useState('top');
 
   useEffect(() => {
     // 初回：ハッシュがあればその位置へ
@@ -25,7 +25,7 @@ export default function Home() {
     }
 
     const handleScroll = () => {
-      const sections = ['about', 'skills', 'works', 'contact'];
+      const sections = ['top', 'about', 'skills', 'works', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {

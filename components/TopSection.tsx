@@ -17,9 +17,9 @@ export default function TopSection() {
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (revealRightCount < rightLen) {
-      timer = setTimeout(() => setRevealRightCount(c => c + 1), 150);
+      timer = setTimeout(() => setRevealRightCount((c) => c + 1), 150);
     } else if (revealLeftCount < leftLen) {
-      timer = setTimeout(() => setRevealLeftCount(c => c + 1), 150);
+      timer = setTimeout(() => setRevealLeftCount((c) => c + 1), 150);
     } else if (!animationComplete) {
       setAnimationComplete(true);
     }
@@ -29,16 +29,14 @@ export default function TopSection() {
   const rows = Array.from({ length: rightLen });
 
   return (
-    <section className="relative w-full">
-      {/* 背景画像（スマホのみ高さを小さく） */}
-      <div className="relative w-full h-screen max-md:h-[60vh]">
-        <Image src="/background4.png" alt="背景" fill className="object-cover" priority/>
+    <section id="top" className="relative w-full">
+      <div className="relative h-screen w-full max-md:h-[60vh]">
+        <Image src="/background4.png" alt="背景" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-black bg-opacity-20" />
       </div>
 
-      {/* テキスト（画像上に重ねる） */}
-<div className="absolute inset-0 z-10 flex items-center justify-center px-4 md:px-16">
-  <div className="grid grid-rows-7 grid-cols-2 gap-y-1 md:gap-y-2 gap-x-2 md:gap-x-4 text-base md:text-4xl text-white text-center md:text-left">
+      <div className="absolute inset-0 z-10 flex items-center justify-center px-4 md:px-16">
+        <div className="grid grid-cols-2 grid-rows-7 gap-x-2 gap-y-1 text-center text-base text-white md:gap-x-4 md:gap-y-2 md:text-left md:text-4xl">
           {rows.map((_, i) => {
             const rightChar = i < revealRightCount ? rightText[i] : '';
             const leftChar = i > 0 && i - 1 < revealLeftCount ? leftText[i - 1] : '';
@@ -56,10 +54,9 @@ export default function TopSection() {
         </div>
       </div>
 
-      {/* 下の矢印 */}
       {animationComplete && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="w-1 h-12 bg-[#3be7ed] mx-auto animate-bounce" />
+        <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 transform">
+          <div className="mx-auto h-12 w-1 animate-bounce bg-[#3be7ed]" />
         </div>
       )}
     </section>
