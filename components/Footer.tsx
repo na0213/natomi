@@ -83,7 +83,7 @@ export default function Footer() {
             <div className="space-y-2 text-[#696969]">
               <div className="flex items-center">
                 <i className="ri-mail-line mr-2" />
-                <span>natomi.work@gmail.com</span>
+                <span>info@natomi.work</span>
               </div>
               <div className="flex items-center">
                 <i className="ri-map-pin-line mr-2" />

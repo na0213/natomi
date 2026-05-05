@@ -32,9 +32,9 @@ export async function POST(req: Request) {
 
     // SMTPトランスポート（Gmail）
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
+      host: 'smtp.muumuu-mail.com',
       port: 465,
-      secure: true, // 465はsecure:true
+      secure: true, // 465はSSL/TLSなのでtrue
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
