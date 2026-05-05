@@ -10,6 +10,7 @@ export default function ContactSection() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const validateField = (name: string, value: string) => {
@@ -59,7 +60,12 @@ export default function ContactSection() {
       setErrors(newErrors);
       return;
     }
-    
+
+    setSubmitStatus('idle');
+    setIsConfirmOpen(true);
+  };
+
+  const handleConfirmSubmit = async () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     
@@ -76,12 +82,15 @@ export default function ContactSection() {
       
       if (response.ok) {
         setSubmitStatus('success');
+        setIsConfirmOpen(false);
         setFormData({ name: '', email: '', message: '' });
         setErrors({});
       } else {
+        setIsConfirmOpen(false);
         setSubmitStatus('error');
       }
     } catch {
+      setIsConfirmOpen(false);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -191,6 +200,64 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+
+      {isConfirmOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contact-confirm-title"
+        >
+          <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-2xl">
+            <h3 id="contact-confirm-title" className="text-xl font-semibold text-[#333]">
+              以下の内容で送信します。よろしいですか？
+            </h3>
+
+            <div className="mt-6 space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
+              <div>
+                <p className="text-xs font-semibold text-gray-500">お名前</p>
+                <p className="mt-1 break-words text-sm text-gray-800">{formData.name}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500">メールアドレス</p>
+                <p className="mt-1 break-words text-sm text-gray-800">{formData.email}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500">メッセージ</p>
+                <p className="mt-1 max-h-48 overflow-y-auto whitespace-pre-wrap break-words text-sm leading-6 text-gray-800">
+                  {formData.message}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setIsConfirmOpen(false)}
+                disabled={isSubmitting}
+                className="rounded-lg border border-gray-300 px-5 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                戻る
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmSubmit}
+                disabled={isSubmitting}
+                className="rounded-lg bg-[#3be7ed] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#2dd4da] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center">
+                    <i className="ri-loader-2-line mr-2 animate-spin"></i>
+                    送信中...
+                  </span>
+                ) : (
+                  'この内容で送信'
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

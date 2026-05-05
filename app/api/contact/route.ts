@@ -15,6 +15,15 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export async function POST(req: Request) {
   try {
     const { name, email, message } = (await req.json()) as Body;
@@ -41,6 +50,10 @@ export async function POST(req: Request) {
       },
     });
 
+    const escapedName = escapeHtml(name);
+    const escapedEmail = escapeHtml(email);
+    const escapedMessage = escapeHtml(message);
+
     // Gmail/DMARC対策：From は自分のアドレス、replyTo に送信者を入れる
     await transporter.sendMail({
       envelope: {
@@ -54,10 +67,27 @@ export async function POST(req: Request) {
       text: `お名前: ${name}\nメール: ${email}\n\n${message}`,
       html: `
         <h2>お問い合わせ</h2>
-        <p><strong>お名前:</strong> ${name}</p>
-        <p><strong>メール:</strong> ${email}</p>
+        <p><strong>お名前:</strong> ${escapedName}</p>
+        <p><strong>メール:</strong> ${escapedEmail}</p>
         <p><strong>メッセージ:</strong></p>
-        <pre style="white-space:pre-wrap;font-family:inherit">${message}</pre>
+        <pre style="white-space:pre-wrap;font-family:inherit">${escapedMessage}</pre>
+      `,
+    });
+
+    await transporter.sendMail({
+      envelope: {
+        from: process.env.MAIL_USER,
+        to: email,
+      },
+      from: process.env.MAIL_FROM,
+      to: email,
+      replyTo: process.env.MAIL_TO,
+      subject: 'お問い合わせありがとうございます',
+      text: `${name} 様\n\nお問い合わせいただきありがとうございます。\n必要に応じて回答いたします。\n\nこのメールは自動送信です。`,
+      html: `
+        <p>${escapedName} 様</p>
+        <p>お問い合わせいただきありがとうございます。<br />必要に応じて回答いたします。</p>
+        <p>このメールは自動送信です。</p>
       `,
     });
 
