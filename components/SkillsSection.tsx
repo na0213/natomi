@@ -79,7 +79,7 @@ export default function SkillsSection() {
                 </div>
 
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${
+                  className={`overflow-hidden transition-all duration-300 [@media(hover:none)]:max-h-48 [@media(hover:none)]:opacity-100 ${
                     hoveredSkill === skill.id ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >

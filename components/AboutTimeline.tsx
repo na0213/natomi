@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState, Fragment } from 'react';
 import styles from './AboutTimeline.module.css';
+import { createInkTimeline, type InkTimeline, type RowInfo } from './inkEngine';
+import type { MotifId } from './inkMotifs';
 
 type Side = 'left' | 'right';
 
@@ -11,6 +13,7 @@ export type TimelineItem = {
   period: string;     // 表示用（"2024年〜" など）
   title: string;
   description: string;
+  motif?: MotifId;    // 年表の線画（空いている側に描く）
 };
 
 /* ======= ユーティリティ ======= */
@@ -69,30 +72,90 @@ export default function AboutTimeline({ items }: { items: TimelineItem[] }) {
   }, [enriched]);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const [progress, setProgress] = useState(0); // 0..1
+  const timelineRef = useRef<HTMLDivElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const ferretRef = useRef<HTMLDivElement | null>(null);
+  const inkRef = useRef<InkTimeline | null>(null);
+  const progressYRef = useRef(0); // 進捗線の現在Y（ページ座標）
 
   // 行ノード参照（同じ index = 同じ“月の行”）
   const leftRefs  = useRef<(HTMLDivElement | null)[]>([]);
   const rightRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [reached, setReached] = useState<Record<string, boolean>>({});
 
+  // 一本線の手描きインク（Canvas）。レイアウトを測って線画の置き場所を決める
+  useEffect(() => {
+    const tl = timelineRef.current;
+    const canvas = canvasRef.current;
+    const ferret = ferretRef.current;
+    if (!tl || !canvas || !ferret) return;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ink = createInkTimeline({ canvas, ferret, reduce });
+    inkRef.current = ink;
+
+    const syncProgress = () => {
+      const top = tl.getBoundingClientRect().top + window.scrollY;
+      ink.setAnchor(progressYRef.current - top);
+    };
+
+    const layout = () => {
+      const w = tl.clientWidth;
+      const h = tl.clientHeight;
+      if (w < 10 || h < 10) return; // スマホでは年表自体を表示しない
+      const tr = tl.getBoundingClientRect();
+      const titleY = (cell: HTMLElement | null) => {
+        const t = cell?.querySelector('h4');
+        if (!t) return undefined;
+        const b = t.getBoundingClientRect();
+        return b.top - tr.top + b.height / 2;
+      };
+      const rows: RowInfo[] = orderKeys.map((k, idx) => {
+        const L = leftRefs.current[idx];
+        const R = rightRefs.current[idx];
+        const lItem = leftMap.get(k);
+        const rItem = rightMap.get(k);
+        const base = (L ?? R)!.getBoundingClientRect();
+        const only = lItem && !rItem ? lItem : rItem && !lItem ? rItem : undefined;
+        return {
+          top: base.top - tr.top,
+          height: base.height,
+          leftY: lItem ? titleY(L) : undefined,
+          rightY: rItem ? titleY(R) : undefined,
+          motif: only?.motif,
+          doodleSide: only ? (lItem ? 'R' : 'L') : undefined,
+        };
+      });
+      ink.layout(w, h, rows);
+      syncProgress();
+    };
+
+    layout();
+    const ro = new ResizeObserver(layout);
+    ro.observe(tl);
+    document.fonts?.ready.then(layout);
+    return () => {
+      ro.disconnect();
+      ink.destroy();
+      inkRef.current = null;
+    };
+  }, [orderKeys, leftMap, rightMap]);
+
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
 
     const onScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
+      // 進捗線の現在Y（ページ座標）：画面の少し下寄りを「いま読んでいる位置」とみなす
+      const progressY = window.scrollY + window.innerHeight * 0.62;
 
-      // 進捗線：早めに始め、遅めに終わる
-      const start = rect.top - vh * 0.60;
-      const end   = rect.bottom - vh * 0.10;
-      const p = Math.min(1, Math.max(0, (0 - start) / (end - start)));
-      setProgress(p);
-
-      // 進捗線の現在Y（ページ座標）
-      const containerTop = el.getBoundingClientRect().top + window.scrollY;
-      const progressY = containerTop + (rect.height * p);
+      // 手描きの線も同じ位置まで進める（下線と同期）
+      progressYRef.current = progressY;
+      const tl = timelineRef.current;
+      if (tl) {
+        const tlTop = tl.getBoundingClientRect().top + window.scrollY;
+        inkRef.current?.setAnchor(progressY - tlTop);
+      }
 
       // 各行の“上から15%”を超えたら下線オン
       const next: Record<string, boolean> = {};
@@ -110,7 +173,10 @@ export default function AboutTimeline({ items }: { items: TimelineItem[] }) {
           next[`R-${idx}`] = progressY >= triggerY;
         }
       });
-      setReached(next);
+      setReached(prev => {
+        const keys = Object.keys(next);
+        return keys.length === Object.keys(prev).length && keys.every(k => prev[k] === next[k]) ? prev : next;
+      });
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -133,10 +199,13 @@ export default function AboutTimeline({ items }: { items: TimelineItem[] }) {
         </div>
 
       {/* タイムライン本体 */}
-      <div className={styles.timeline}>
-        {/* 中央線（背景＋進捗） */}
+      <div className={styles.timeline} ref={timelineRef}>
+        {/* 中央線（下書きの薄い線）。この上を、手描きのインクとフェレットが進む */}
         <div className={styles.centerRail} />
-        <div className={styles.centerProgress} style={{ height: `${progress * 100}%` }} />
+        <canvas ref={canvasRef} className={styles.ink} aria-hidden="true" />
+        <div ref={ferretRef} className={styles.ferret} aria-hidden="true">
+          <img src="/icons/up.png" alt="" width={46} height={46} className="animate-slow-bounce" />
+        </div>
 
         {/* 月ごとの行（左 | 溝 | 右） */}
         <div className={styles.rows}>

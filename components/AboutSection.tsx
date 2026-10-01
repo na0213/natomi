@@ -7,6 +7,8 @@ import styles from './AboutSection.module.css';
 import EyeAvatar from '@/components/EyeAvatar';
 import { Darumadrop_One } from 'next/font/google';
 import AboutTimeline, { TimelineItem } from './AboutTimeline';
+import AboutTimelineMobile from './AboutTimelineMobile';
+import type { MotifId } from './inkMotifs';
 
 const darumadrop = Darumadrop_One({
   weight: '400',
@@ -26,6 +28,7 @@ type RawItem = {
   range?: [string, string];    // 開始〜終了の年月
   role?: string;               // 表示名が role の場合
   school?: string;             // 表示名が school の場合
+  motif?: MotifId;             // 年表の線画（空いている側に描く）
   description: string;
 };
 
@@ -33,16 +36,16 @@ type RawItem = {
    データ
    ========================= */
 const TIMELINE_ITEMS: RawItem[] = [
-  { side: 'left',  period: '2026年〜', when: '2026/01', role: 'Web engineer', description: 'AWSサーバレスサイト制作' },
+  { side: 'left',  period: '2026年〜', when: '2026/01', role: 'Web engineer', motif: 'browser', description: 'AWSサーバレスサイト制作' },
   { side: 'left',  period: '2024年〜', when: '2024/10', role: 'ライター', description: 'Webメディア・広報の取材執筆' },
-  { side: 'right', period: '〜2025年', when: '2025/02', role: 'コミュニティマネージャー', description: '地域関連プログラムで、受講生とのコミュニケーション運営を担当' },
+  { side: 'right', period: '〜2025年', when: '2025/02', role: 'コミュニティマネージャー', motif: 'bubbles', description: '地域関連プログラムで、受講生とのコミュニケーション運営を担当' },
   { side: 'right', period: '2024年', when: '2024/10', role: 'インタビューライター講座修了', description: '地域密着の取材・執筆を実践' },
-  { side: 'right', period: '2024年', when: '2024/06', role: '地域関連プログラム修了', description: '生産者訪問から販売企画まで、地域の魅力を届ける流れを実践' },
+  { side: 'right', period: '2024年', when: '2024/06', role: '地域関連プログラム修了', motif: 'mountain', description: '生産者訪問から販売企画まで、地域の魅力を届ける流れを実践' },
   { side: 'right', period: '2023年〜2024年', range: ['2023/04', '2024/03'], role: 'Web開発スクール', description: 'HTML/CSS/PHP/Laravel、Next.js/React などを学習' },
-  { side: 'right', period: '2022年', range: ['2022/04', '2022/12'], role: 'プログラミング講座', description: 'HTML/CSS/PHP/Laravel を学習' },
+  { side: 'right', period: '2022年', range: ['2022/04', '2022/12'], role: 'プログラミング講座', motif: 'sprout', description: 'HTML/CSS/PHP/Laravel を学習' },
   { side: 'left',  period: '2017年〜2024年', range: ['2017/04', '2024/03'], role: '物流・品質管理', description: 'メーカーで品質管理、物流改善に従事' },
-  { side: 'right', period: '〜2008年', when: '2008/03', role: '生物系 修士', description: '海洋生物に関する遺伝学研究' },
-  { side: 'left',  period: '2015年〜2017年', range: ['2015/04', '2017/03'], role: '研究補助・秘書', description: '研究機関での研究補助・秘書業務' },
+  { side: 'right', period: '〜2008年', when: '2008/03', role: '生物系 修士', motif: 'dolphin', description: '海洋生物に関する遺伝学研究' },
+  { side: 'left',  period: '2015年〜2017年', range: ['2015/04', '2017/03'], role: '研究補助・秘書', motif: 'flask', description: '研究機関での研究補助・秘書業務' },
 ];
 
 /* =========================
@@ -84,6 +87,7 @@ function toTimelineItems(raw: RawItem[]): TimelineItem[] {
       range,
       title: it.role || it.school || '(未設定)',
       description: it.description,
+      motif: it.motif,
     };
   });
 }
@@ -331,39 +335,8 @@ export default function AboutSection() {
             </div>
           )}
 
-          {/* スマホ：1カラム（しごと → かつどう） */}
-          <div className="max-w-6xl mx-auto md:hidden">
-            {/* しごと */}
-            <h3 className="flex items-center justify-start text-base font-bold text-gray-700 mb-3">
-              <img src="/icons/pink.png" alt="" aria-hidden="true" className="inline-block w-5 h-5 mr-2" />
-              しごと
-            </h3>
-            <div className="space-y-5">
-              {timelineItems.filter(i => i.side === 'left').map((it) => (
-                <div key={`${it.period}-${it.title}`}>
-                  <div className="text-xs text-[#808080] mb-1">{it.period}</div>
-                  <div className="text-[15px] font-semibold text-[#374151]">{it.title}</div>
-                  <p className="text-sm text-gray-700 mt-1">{it.description}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* かつどう */}
-            <h3 className="flex items-center justify-start text-base font-bold text-gray-700 mt-8 mb-3">
-              <img src="/icons/green.png" alt="" aria-hidden="true" className="inline-block w-5 h-5 mr-2" />
-              かつどう
-            </h3>
-
-            <div className="space-y-5">
-              {timelineItems.filter(i => i.side === 'right').map((it) => (
-                <div key={`${it.period}-${it.title}`}>
-                  <div className="text-xs text-[#808080] mb-1">{it.period}</div>
-                  <div className="text-[15px] font-semibold text-[#374151]">{it.title}</div>
-                  <p className="text-sm text-gray-700 mt-1">{it.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* スマホ：1カラム（しごと → かつどう）。左に手描きの線を引く */}
+          <AboutTimelineMobile items={timelineItems} />
 
           {/* PC：左右（本番年表） */}
           <div className="max-w-6xl mx-auto hidden md:block">

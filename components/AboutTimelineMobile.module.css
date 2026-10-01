@@ -1,0 +1,34 @@
+/* スマホの年表：左に手描きの線を引くための余白と、線画の置き場所 */
+.box {
+  position: relative;
+  padding-left: 34px;   /* 線とお花の分 */
+}
+
+.ink {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ferret {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  margin: -37px 0 0 -20px;   /* 足元が線の先に来る */
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s;
+  will-change: transform;
+}
+
+/* 線画を描く場所（文言の下の空き） */
+.slot {
+  height: 96px;
+}
