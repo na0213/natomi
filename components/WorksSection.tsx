@@ -9,11 +9,12 @@ interface WorkItem {
   title: string;
   description: string;
   category: string;
-  type: 'site' | 'app';
+  type: 'site' | 'app' | 'interactive';
   videoSrc?: string;
   imageSrc?: string;
   href?: string;
-  ratio?: number;                    // メディアの縦横比（分解図の層をそろえる）
+  external?: boolean;                // 詳細ページを挟まず、公開中のサイトへ
+  ratio?: number;                   // メディアの縦横比（分解図の層をそろえる）
   layers?: WorkCardItem['layers'];   // 重ねて見せる実際のページ（サイト／アプリの中の言葉）
   phone?: boolean;                   // スマホ画面
 }
@@ -65,12 +66,46 @@ const works: WorkItem[] = [
       bottom: { label: 'カテゴリ管理', src: '/works/pushly/screen-category.jpg' },
     },
   },
+  {
+    id: 'shinsouku',
+    title: '深層区',
+    description: '水深3,208mの沈降市街を、7つの視点から探索できる3D作品。',
+    category: '3D・インタラクティブ',
+    type: 'interactive',
+    imageSrc: '/works/shinsouku/view1.jpg',
+    href: 'https://shinsouku.natomi.work/',
+    external: true,
+    ratio: 1600 / 1000,
+  },
+  {
+    id: 'hakoniwa',
+    title: '本日の太陽系',
+    description: '今日の日付どおりの天体の位置を、3Dで眺められる太陽系。',
+    category: '3D・インタラクティブ',
+    type: 'interactive',
+    imageSrc: '/works/hakoniwa/view1.jpg',
+    href: 'https://hakoniwa.natomi.work/',
+    external: true,
+    ratio: 1600 / 1000,
+  },
+  {
+    id: 'punien',
+    title: 'ぷにえん',
+    description: 'ぷにぷにのどうぶつを、つついたり、ひっぱって投げたりして遊べる広場。',
+    category: 'インタラクティブ',
+    type: 'interactive',
+    imageSrc: '/works/punien/view1.jpg',
+    href: 'https://punien.natomi.work/',
+    external: true,
+    ratio: 1600 / 1000,
+  },
 ];
 
 const filters = [
   { id: 'all', label: 'All' },
   { id: 'site', label: 'Web Site' },
   { id: 'app', label: 'Apps' },
+  { id: 'interactive', label: 'Interactive' },
 ] as const;
 
 type FilterId = (typeof filters)[number]['id'];

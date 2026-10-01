@@ -19,6 +19,7 @@ export type WorkCardItem = {
   imageSrc?: string;
   thumbnail?: string;
   href?: string;
+  external?: boolean;            // 詳細ページを挟まず、公開中のサイトを新しいタブで開く
   ratio: number;                 // メディアの縦横比（幅/高さ）
   /** 指定すると、ホバーでページが層になって開く。なければ従来どおりの1枚表示 */
   layers?: { top: string; mid: WorkLayer; bottom: WorkLayer };
@@ -171,6 +172,7 @@ export default function WorkCard({ work }: { work: WorkCardItem }) {
   return (
     <Link
       href={work.href || `/works/${work.id}`}
+      {...(work.external && { target: '_blank', rel: 'noopener noreferrer' })}
       onPointerEnter={(e) => {
         if (layers && e.pointerType === 'mouse') setOpen(true);
       }}
@@ -251,7 +253,9 @@ export default function WorkCard({ work }: { work: WorkCardItem }) {
           <ArrowUpRight className="h-5 w-5 shrink-0 text-[#08aeb8]" aria-hidden="true" />
         </div>
         <p className="text-sm leading-7 text-[#4c585b]">{work.description}</p>
-        <p className="mt-auto pt-5 text-xs font-bold tracking-[0.2em] text-[#08aeb8]">VIEW DETAIL</p>
+        <p className="mt-auto pt-5 text-xs font-bold tracking-[0.2em] text-[#08aeb8]">
+          {work.external ? 'デモを開く' : 'VIEW DETAIL'}
+        </p>
       </div>
     </Link>
   );
