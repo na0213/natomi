@@ -42,6 +42,8 @@
 .screen {
   z-index: 3;
   overflow: hidden;
+  border-radius: var(--radc, 0px);
+  transition: transform 0.95s var(--ease), opacity 0.5s ease, outline-color 0.5s, border-radius 0.5s ease;
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);   /* 以前の shadow-sm 相当 */
   outline: 1.5px solid transparent;
   outline-offset: 0;
@@ -59,8 +61,9 @@
 .build {
   opacity: 0;
   background: #fffdf8;
+  overflow: hidden;
   border: 1.5px solid var(--ink);
-  border-radius: 8px;
+  border-radius: var(--rad, 8px);
   box-shadow: 0 18px 22px -16px rgb(104 80 64 / 0.45);
 }
 .build { z-index: 2; background: #fff; }
@@ -74,29 +77,6 @@
   height: 0;
 }
 
-/* ---- 設計：ワイヤーフレーム ---- */
-.design i { position: absolute; border: 1.3px dashed var(--ink); border-radius: 3px; display: block; }
-.wfHeader { left: 6%; top: 8%; width: 88%; height: 9%; }
-.wfHero { left: 6%; top: 22%; width: 88%; height: 34%; overflow: hidden; }
-.wfHero svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.wfHero line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.55; }
-.wfMark { left: 12%; top: 33%; width: 38%; height: 12%; border: 0 !important; background: #f8e8a0; opacity: 0.9; border-radius: 2px; }
-.wfCard { top: 63%; width: 26%; height: 27%; }
-
-/* ---- 開発・実装：コードの棒 ---- */
-.build {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding: 7% 8%;
-}
-.codeLine { display: flex; gap: 3%; align-items: center; }
-.bar { display: block; height: 6px; border-radius: 4px; flex: none; }
-.bar_p { background: #f8c8c0; }
-.bar_b { background: #b8e0f0; }
-.bar_g { background: #d0f0d0; }
-.bar_y { background: #f8e8a0; }
-
 /* ---- 開いた状態 ---- */
 .root[data-open='1'] .stack {
   will-change: transform;
@@ -106,6 +86,7 @@
     scale(var(--os));
 }
 .root[data-open='1'] .screen {
+  border-radius: var(--rad, 8px);
   transform: translateZ(92px);
   outline-color: var(--ink);
 }

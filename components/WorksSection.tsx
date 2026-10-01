@@ -1,26 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { ArrowUpRight, Plus } from 'lucide-react';
-import WorkModal from './WorkModal';
-import WorkCard, { type WorkLayers } from './WorkCard';
+import WorkCard, { type WorkCardItem } from './WorkCard';
 
 interface WorkItem {
   id: string;
   title: string;
   description: string;
   category: string;
-  type: 'site' | 'app' | 'ai';
+  type: 'site' | 'app';
   videoSrc?: string;
   imageSrc?: string;
   href?: string;
-  thumbnail?: string;
-  isAi?: boolean;
-  aiTools?: string;
-  modalMedia?: string;
-  ratio?: number;         // メディアの縦横比（分解図の層をそろえる）
-  layers?: WorkLayers;    // 作品詳細ページの「開発の流れ」の見出し
+  ratio?: number;                    // メディアの縦横比（分解図の層をそろえる）
+  layers?: WorkCardItem['layers'];   // 重ねて見せる実際のページ（サイト／アプリの中の言葉）
+  phone?: boolean;                   // スマホ画面
 }
 
 const works: WorkItem[] = [
@@ -33,18 +28,11 @@ const works: WorkItem[] = [
     videoSrc: '/works/1/work1.mp4',
     href: '/works/1',
     ratio: 1024 / 798,
-    layers: { design: '企画・設計', build: '開発・実装', release: '公開' },
-  },
-  {
-    id: '2',
-    title: 'Pet Commons（試作）',
-    description: 'ペットとの暮らしを起点にしたコミュニティサービスのLP試作。',
-    category: 'LP / サービス構想',
-    type: 'site',
-    videoSrc: '/works/petcommon/petcommon.mp4',
-    href: '/works/2',
-    ratio: 1280 / 780,
-    layers: { design: '設計', build: '開発・実装', release: '公開' },
+    layers: {
+      top: 'STORY',
+      mid: { label: '牧場検索', src: '/works/1/page-search.jpg' },
+      bottom: { label: 'NOTE', src: '/works/1/page-note.jpg' },
+    },
   },
   {
     id: '3',
@@ -52,21 +40,30 @@ const works: WorkItem[] = [
     description: 'ライティング、Web開発、AI表現をまとめる自分自身の制作拠点。',
     category: 'Portfolio',
     type: 'site',
-    imageSrc: '/works/portfolio/desktop.png',
+    videoSrc: '/works/portfolio/site-pc.mp4',
     href: '/works/3',
-    ratio: 940 / 788,
-    layers: { design: '設計', build: '開発・実装', release: '公開' },
+    ratio: 1100 / 798,
+    layers: {
+      top: 'わくわくすること',
+      mid: { label: 'ABOUT', src: '/works/portfolio/page-timeline.jpg' },
+      bottom: { label: 'SKILLS', src: '/works/portfolio/page-skills.jpg' },
+    },
   },
   {
-    id: 'ai-1',
-    title: 'AI生成キャラクターイラスト',
-    description: 'MidjourneyとPhotoshopを活用した生成AIイラスト作品。',
-    category: '生成AI',
-    type: 'ai',
-    thumbnail: '/works/ai-1/ai-3.png',
-    isAi: true,
-    modalMedia: '/works/ai-1/ai-3.png',
-    aiTools: 'Midjourney, Photoshop',
+    id: 'pushly',
+    title: 'Pushly',
+    description: '予約、サブスク、健診、更新日 忘れがちな予定のためのリマインダー',
+    category: 'iPhoneアプリ',
+    type: 'app',
+    imageSrc: '/works/pushly/screen-home.jpg',
+    href: '/works/pushly',
+    ratio: 640 / 1387,
+    phone: true,
+    layers: {
+      top: '予定',
+      mid: { label: '通知タイミング', src: '/works/pushly/screen-detail.jpg' },
+      bottom: { label: 'カテゴリ管理', src: '/works/pushly/screen-category.jpg' },
+    },
   },
 ];
 
@@ -78,21 +75,10 @@ const filters = [
 
 type FilterId = (typeof filters)[number]['id'];
 
-const aiWorks = works.filter((work) => work.type === 'ai');
-const aiMarqueeItems = [
-  ...aiWorks,
-  { id: 'ai-soon-1', title: 'Coming soon', description: 'AI visual note', category: '生成AI', type: 'ai' as const },
-  { id: 'ai-soon-2', title: 'Coming soon', description: 'Movie / image study', category: '生成AI', type: 'ai' as const },
-  { id: 'ai-soon-3', title: 'Coming soon', description: 'Small experiment', category: '生成AI', type: 'ai' as const },
-];
-
 export default function WorksSection() {
-  const [selected, setSelected] = useState<WorkItem | null>(null);
   const [filter, setFilter] = useState<FilterId>('all');
 
-  const mainWorks = works.filter((work) => work.type !== 'ai');
-  const filteredWorks = mainWorks.filter((work) => filter === 'all' || work.type === filter);
-  const marqueeItems = [...aiMarqueeItems, ...aiMarqueeItems];
+  const filteredWorks = works.filter((work) => filter === 'all' || work.type === filter);
 
   return (
     <section id="works" className="bg-[#f6fbfb] py-20 scroll-mt-24">
@@ -125,9 +111,7 @@ export default function WorksSection() {
 
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {filteredWorks.map((work) =>
-            work.ratio && work.layers ? (
-              <WorkCard key={work.id} work={{ ...work, ratio: work.ratio, layers: work.layers }} />
-            ) : null
+            work.ratio ? <WorkCard key={work.id} work={{ ...work, ratio: work.ratio }} /> : null
           )}
 
           <div className="flex min-h-[420px] flex-col justify-between border border-dashed border-[#9bd9dc] bg-white/70 p-8">
@@ -150,74 +134,6 @@ export default function WorksSection() {
             </a>
           </div>
         </div>
-
-        <div className="mx-auto mt-14 max-w-6xl overflow-hidden border-t border-[#cce7e8] pt-8">
-          <div className="mb-5 flex items-center justify-between gap-4">
-            <p className="text-xs font-bold tracking-[0.24em] text-[#08aeb8]">AI / VISUAL</p>
-            <p className="text-xs text-[#6b777a]">small experiments</p>
-          </div>
-
-          <div className="relative -mx-4 overflow-hidden px-4">
-            <div className="ai-marquee-track flex w-max gap-4">
-              {marqueeItems.map((item, index) => {
-                const isRealWork = Boolean(item.isAi && item.modalMedia);
-
-                const card = (
-                  <div className="flex h-32 w-52 shrink-0 items-center gap-3 bg-white/80 p-3 shadow-sm ring-1 ring-[#dce8e8]">
-                    <div className="relative h-20 w-20 shrink-0 overflow-hidden bg-[#e6fafa]">
-                      {item.thumbnail ? (
-                        <Image
-                          src={item.thumbnail}
-                          alt={`${item.title} のサムネイル`}
-                          fill
-                          sizes="80px"
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center text-xl font-bold text-[#9bd9dc]">
-                          +
-                        </div>
-                      )}
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-bold tracking-[0.16em] text-[#08aeb8]">{item.category}</p>
-                      <h3 className="mt-1 truncate text-sm font-semibold text-[#243033]">{item.title}</h3>
-                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#657174]">{item.description}</p>
-                    </div>
-                  </div>
-                );
-
-                if (!isRealWork) {
-                  return <div key={`${item.id}-${index}`}>{card}</div>;
-                }
-
-                return (
-                  <button
-                    key={`${item.id}-${index}`}
-                    type="button"
-                    onClick={() => setSelected(item)}
-                    className="text-left transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#08aeb8]/40"
-                  >
-                    {card}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {selected && (
-          <WorkModal
-            isOpen
-            onClose={() => setSelected(null)}
-            work={{
-              title: selected.title,
-              modalMedia: selected.modalMedia!,
-              aiTool: selected.aiTools!,
-              description: selected.description,
-            }}
-          />
-        )}
       </div>
     </section>
   );

@@ -50,16 +50,3 @@ body {
 .animate-slow-bounce {
   animation: slow-bounce 1.4s infinite;
 }
-
-@keyframes ai-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.ai-marquee-track {
-  animation: ai-marquee 34s linear infinite;
-}
-
-.ai-marquee-track:hover {
-  animation-play-state: paused;
-}
