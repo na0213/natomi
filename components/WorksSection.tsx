@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import WorkModal from './WorkModal';
+import WorkCard, { type WorkLayers } from './WorkCard';
 
 interface WorkItem {
   id: string;
@@ -19,6 +19,8 @@ interface WorkItem {
   isAi?: boolean;
   aiTools?: string;
   modalMedia?: string;
+  ratio?: number;         // メディアの縦横比（分解図の層をそろえる）
+  layers?: WorkLayers;    // 作品詳細ページの「開発の流れ」の見出し
 }
 
 const works: WorkItem[] = [
@@ -30,6 +32,8 @@ const works: WorkItem[] = [
     type: 'site',
     videoSrc: '/works/1/work1.mp4',
     href: '/works/1',
+    ratio: 1024 / 798,
+    layers: { design: '企画・設計', build: '開発・実装', release: '公開' },
   },
   {
     id: '2',
@@ -39,6 +43,8 @@ const works: WorkItem[] = [
     type: 'site',
     videoSrc: '/works/petcommon/petcommon.mp4',
     href: '/works/2',
+    ratio: 1280 / 780,
+    layers: { design: '設計', build: '開発・実装', release: '公開' },
   },
   {
     id: '3',
@@ -48,6 +54,8 @@ const works: WorkItem[] = [
     type: 'site',
     imageSrc: '/works/portfolio/desktop.png',
     href: '/works/3',
+    ratio: 940 / 788,
+    layers: { design: '設計', build: '開発・実装', release: '公開' },
   },
   {
     id: 'ai-1',
@@ -116,60 +124,11 @@ export default function WorksSection() {
         </div>
 
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {filteredWorks.map((work) => {
-            const media = (
-              <div className="relative flex aspect-square items-center justify-center overflow-hidden bg-[#eceeee] p-8 md:p-10">
-                {work.videoSrc ? (
-                  <video
-                    src={work.videoSrc}
-                    autoPlay
-                    loop
-                    muted
-                    preload="metadata"
-                    playsInline
-                    className="max-h-[74%] w-full object-contain shadow-sm transition duration-500 group-hover:scale-[1.04]"
-                  />
-                ) : (
-                  <Image
-                    src={work.imageSrc || work.thumbnail || ''}
-                    alt={`${work.title} のプレビュー`}
-                    fill
-                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-contain p-10 transition duration-500 group-hover:scale-[1.04]"
-                  />
-                )}
-                <span className="absolute left-5 top-5 bg-white/92 px-4 py-2 text-xs font-bold tracking-[0.12em] text-[#087f86] shadow-sm">
-                  {work.category}
-                </span>
-              </div>
-            );
-
-            const body = (
-              <>
-                {media}
-                <div className="flex min-h-[148px] flex-col bg-[#eceeee] px-6 pb-6 pt-1 text-[#172225]">
-                  <div className="mb-3 flex items-start justify-between gap-4">
-                    <h3 className="text-xl font-semibold">{work.title}</h3>
-                    <ArrowUpRight className="h-5 w-5 shrink-0 text-[#08aeb8]" aria-hidden="true" />
-                  </div>
-                  <p className="text-sm leading-7 text-[#4c585b]">{work.description}</p>
-                  <p className="mt-auto pt-5 text-xs font-bold tracking-[0.2em] text-[#08aeb8]">
-                    VIEW DETAIL
-                  </p>
-                </div>
-              </>
-            );
-
-            return (
-              <Link
-                key={work.id}
-                href={work.href || `/works/${work.id}`}
-                className="group overflow-hidden bg-[#eceeee] transition hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3be7ed]/70"
-              >
-                {body}
-              </Link>
-            );
-          })}
+          {filteredWorks.map((work) =>
+            work.ratio && work.layers ? (
+              <WorkCard key={work.id} work={{ ...work, ratio: work.ratio, layers: work.layers }} />
+            ) : null
+          )}
 
           <div className="flex min-h-[420px] flex-col justify-between border border-dashed border-[#9bd9dc] bg-white/70 p-8">
             <div>
