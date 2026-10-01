@@ -43,9 +43,14 @@ export default function WorkPage3() {
       craft={{
         title: 'デザイン・実装上の工夫',
         tone: '#f8c8c0',
-        lines: ['スクロール時のアニメーションを実装。', '再利用可能なUI片をコンポーネント化し、スケールしても保守しやすい構造に。'],
+        lines: [
+          'トップは、手描きの線で世界が描かれ、ドット絵のフェレットと動物たちが落ちて弾みます。',
+          '年表は、スクロールに合わせて一本の線が引かれ、フェレットが先頭を進みます。',
+          'ドット絵やお花のアイコンの雰囲気にそろえて、茶色の線とパステルの色でまとめました。',
+          '再利用可能なUI片をコンポーネント化し、スケールしても保守しやすい構造に。',
+        ],
       }}
-      tech={{ title: '使用言語 / 技術', items: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Vercel'] }}
+      tech={{ title: '使用言語 / 技術', items: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Canvas', 'SVG', 'Vercel'] }}
     />
   );
 }

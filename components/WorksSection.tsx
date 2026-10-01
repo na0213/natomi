@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowUpRight, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import WorkCard, { type WorkCardItem } from './WorkCard';
 
 interface WorkItem {
@@ -86,10 +86,6 @@ export default function WorksSection() {
         <div className="mx-auto mb-12 max-w-3xl text-center">
           <p className="mb-3 text-xs font-bold tracking-[0.22em] text-[#08aeb8]">WORKS</p>
           <h2 className="text-3xl text-[#243033]">つくったもの</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#5e6a6d]">
-              サイト、アプリ、AI表現を、ひとつずつ標本のように並べていく場所です。
-              これから増える個人開発も同じギャラリーに追加していきます。
-          </p>
 
           <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-x-5 gap-y-3 border-b border-[#cce7e8] px-2">
             {filters.map((item) => (
@@ -120,18 +116,11 @@ export default function WorksSection() {
                 <Plus className="h-6 w-6" aria-hidden="true" />
               </div>
               <p className="text-xs font-bold tracking-[0.28em] text-[#08aeb8]">COMING NEXT</p>
-              <h3 className="mt-4 text-2xl font-semibold text-[#243033]">個人開発アプリを追加予定</h3>
+              <h3 className="mt-4 text-2xl font-semibold text-[#243033]">随時追加予定</h3>
               <p className="mt-5 text-sm leading-8 text-[#5d686b]">
                 つくったものを、ここに少しずつ増やしていきます。
               </p>
             </div>
-            <a
-              href="#contact"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-[#176b70] hover:text-[#08aeb8]"
-            >
-              制作について相談する
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
           </div>
         </div>
       </div>
