@@ -1,0 +1,170 @@
+/* 作品詳細（サイト）：実物と見どころ → 誰のため・なぜ → 技術 の順。手描きの枠とパステルのずらし影 */
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #08aeb8;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- ブラウザ枠（PC画面） ---- */
+.browser {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #685040;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 9px 10px 0 var(--pastel, #f8e8a0);
+}
+.bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  height: 26px;
+  padding: 0 12px;
+  border-bottom: 1.5px solid #685040;
+  background: #fffdf8;
+}
+.bar i {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.3px solid #685040;
+}
+.bar i:nth-child(1) { background: #f8c8c0; }
+.bar i:nth-child(2) { background: #f8e8a0; }
+.bar i:nth-child(3) { background: #d0f0d0; }
+.shot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- スマホ枠 ---- */
+.phone {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #685040;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 6px 7px 0 var(--pastel, #b8e0f0);
+}
+.phone video,
+.phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- ヒーロー：PCとスマホを重ねる ---- */
+.stage {
+  position: relative;
+  max-width: 880px;
+  margin: 0 auto;
+  padding-bottom: 36px;
+}
+.stage .pc {
+  width: 86%;
+}
+.phones {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 25%;
+  min-width: 96px;
+}
+.phones .phone + .phone {
+  position: absolute;
+  right: 55%;
+  bottom: 0;
+  width: 92%;
+  transform: rotate(-6deg);
+}
+.phones .phone:first-child {
+  position: relative;
+  z-index: 2;
+  transform: rotate(4deg);
+}
+
+/* ---- 見どころ ---- */
+.grid {
+  display: grid;
+  gap: 3rem 2.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .grid .wide { grid-column: 1 / -1; max-width: 760px; margin-inline: auto; width: 100%; }
+}
+.label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-bottom: 0.9rem;
+}
+.label b {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #08aeb8;
+}
+.label span {
+  font-size: 0.85rem;
+  color: #5e6a6d;
+}
+
+/* ---- 誰のため・なぜ ---- */
+.cards {
+  display: grid;
+  gap: 1.75rem 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}
+.card {
+  position: relative;
+  border: 1.8px solid #685040;
+  border-radius: 18px;
+  background: #fff;
+  padding: 1.4rem 1.4rem 1.5rem;
+  box-shadow: 6px 7px 0 var(--pastel, #f8e8a0);
+}
+.card h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #243033;
+}
+.card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: #5d686b;
+}
+.card p + p { margin-top: 0.5rem; }
+
+.chip {
+  display: inline-block;
+  border: 1px solid #bce9eb;
+  background: #fff;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #078d95;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
