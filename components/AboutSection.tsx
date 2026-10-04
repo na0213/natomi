@@ -36,7 +36,7 @@ type RawItem = {
    データ
    ========================= */
 const TIMELINE_ITEMS: RawItem[] = [
-  { side: 'left',  period: '2026年〜', when: '2026/01', role: 'Web engineer', motif: 'browser', description: 'AWSサーバレスサイト制作' },
+  { side: 'left',  period: '2026年〜', when: '2026/01', role: 'Web engineer', motif: 'browser', description: 'AWSをベースに、AIを活用したサイト制作等' },
   { side: 'left',  period: '2024年〜', when: '2024/10', role: 'ライター', description: 'Webメディア・広報の取材執筆' },
   { side: 'right', period: '〜2025年', when: '2025/02', role: 'コミュニティマネージャー', motif: 'bubbles', description: '地域関連プログラムで、受講生とのコミュニケーション運営を担当' },
   { side: 'right', period: '2024年', when: '2024/10', role: 'インタビューライター講座修了', description: '地域密着の取材・執筆を実践' },
@@ -44,7 +44,7 @@ const TIMELINE_ITEMS: RawItem[] = [
   { side: 'right', period: '2023年〜2024年', range: ['2023/04', '2024/03'], role: 'Web開発スクール', description: 'HTML/CSS/PHP/Laravel、Next.js/React などを学習' },
   { side: 'right', period: '2022年', range: ['2022/04', '2022/12'], role: 'プログラミング講座', motif: 'sprout', description: 'HTML/CSS/PHP/Laravel を学習' },
   { side: 'left',  period: '2017年〜2024年', range: ['2017/04', '2024/03'], role: '物流・品質管理', description: 'メーカーで品質管理、物流改善に従事' },
-  { side: 'right', period: '〜2008年', when: '2008/03', role: '生物系 修士', motif: 'dolphin', description: '海洋生物に関する遺伝学研究' },
+  { side: 'right', period: '〜2008年', when: '2008/03', role: '生物学 修士', motif: 'dolphin', description: '海洋生物に関する分子遺伝学的研究' },
   { side: 'left',  period: '2015年〜2017年', range: ['2015/04', '2017/03'], role: '研究補助・秘書', motif: 'flask', description: '研究機関での研究補助・秘書業務' },
 ];
 
@@ -104,7 +104,7 @@ export default function AboutSection() {
     { title: 'Animal',  modal: '動物のいる暮らしが好きです。イヌ、ネコ、イルカ、ペンギン、ナマケモノなどなど、動物はだいたい好きです。', img: '/about/ferret.png' },
     { title: 'Running', modal: '時間があると川沿いを走ります。トレイルランニングで色々な山も走っています。', img: '/about/run.png' },
     { title: 'Travel',  modal: '地域の魅力を知る旅がすき。温泉やオーベルジュにこだわりのある宿探しをしています。', img: '/about/trip.png' },
-    { title: 'Fishing', modal: '主に海釣り。アジからタイや本ガツオまで。魚は自ら捌いていただいています。', img: '/about/fish.png' },
+    { title: 'Fishing', modal: '主に海釣り。アジからタイや本ガツオまで。魚は自分で捌いていただいています。', img: '/about/fish.png' },
   ];
   const closeBgByIndex = ['/icons/pink.png', '/icons/blue.png', '/icons/green.png', '/icons/yellow.png'];
 
@@ -180,7 +180,7 @@ export default function AboutSection() {
                   <h3 className="text-2xl font-bold text-[#243033] mb-4">Natomi</h3>
                   <div className="space-y-4 text-gray-700">
                     <p>
-                      小さい頃から動物が大好き。大学では海洋学を専攻し、クジラや{' '}
+                    小さい頃から動物が大好きで、大学では海洋学を専攻し、クジラや{' '}
                       <span className="relative inline-block group align-baseline">
                         <span className={`${darumadrop.className} text-[#06becf] align-baseline text-[1.15em] md:text-[1.2em] transition-all duration-300 group-hover:text-[1.3em] md:group-hover:text-[1.4em]`}>
                           イルカ
@@ -192,7 +192,7 @@ export default function AboutSection() {
                           <NextImage src="/icons/dolphin.png" alt="イルカアイコン" width={35} height={35} className="drop-shadow-md" />
                         </span>
                       </span>
-                      に関する遺伝学研究をしていました。
+                      を対象に遺伝子解析の研究をしていました。
                     </p>
 
                     <p>

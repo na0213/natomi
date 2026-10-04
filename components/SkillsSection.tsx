@@ -34,7 +34,7 @@ export default function SkillsSection() {
       art: 'frontend',
       actor: 'cat',
       tone: 'green',
-      description: 'HTML/CSS、JavaScript、React / Next.jsで、見た目と使いやすさを両立したUIを実装します。',
+      description: 'HTML/CSS、JavaScript、React / Next.jsによる、見た目と使いやすさを両立したUI実装。',
     },
     {
       id: 'backend',
@@ -42,7 +42,7 @@ export default function SkillsSection() {
       art: 'webapp',
       actor: 'dog',
       tone: 'yellow',
-      description: 'PHP / Laravel、API連携、フォーム送信、データ処理など、個人開発アプリに必要な土台を組み立てます。',
+      description: 'PHP / Laravel、API連携、フォーム送信、データ処理など、個人開発アプリの土台づくり。',
     },
     {
       id: 'aws',
@@ -50,7 +50,7 @@ export default function SkillsSection() {
       art: 'aws',
       actor: 'whale',
       tone: 'blue',
-      description: 'Lambda / CloudFront / Route 53 / API Gateway / S3を用いたサーバレス構成、EC2での簡易構築に対応します。',
+      description: 'Lambda / CloudFront / Route 53 / API Gateway / S3を用いたサーバレス構成、EC2での簡易構築など。',
     },
     {
       id: 'writing',
@@ -58,7 +58,7 @@ export default function SkillsSection() {
       art: 'writing',
       actor: 'sloth',
       tone: 'yellow',
-      description: 'インタビュー記事や広報コンテンツの執筆経験を活かし、伝えるべき魅力を整理して言葉にします。',
+      description: 'インタビュー記事や広報コンテンツの執筆。伝えるべき魅力を整理し、言葉に。',
     },
     {
       id: 'genai',
@@ -66,7 +66,7 @@ export default function SkillsSection() {
       art: 'genai',
       actor: 'penguin',
       tone: 'pink',
-      description: '文章生成、画像制作、動画制作、制作フローの効率化に生成AIを取り入れます。生成AIパスポート取得。',
+      description: '文章・画像・動画制作と、制作フローの効率化への生成AIの導入。生成AIパスポート取得。',
     },
     {
       id: 'visual',
@@ -74,7 +74,7 @@ export default function SkillsSection() {
       art: 'ar',
       actor: 'dolphin',
       tone: 'green',
-      description: 'Blenderの基礎を学びながら、8th WallやRodinと組み合わせたWebAR表現を探っています。',
+      description: 'Blenderの基礎を学びつつ、Rodinで作ったモデルのWebAR表現を探求中。',
     },
   ];
 
@@ -116,12 +116,9 @@ export default function SkillsSection() {
               </svg>
             </span>
           </h2>
-          <p className="mt-4 text-sm leading-7 text-[#5e6a6d]">
-            書く、聞く、設計する、実装する。個人開発アプリを育てていくための力を、制作物として積み重ねています。
-          </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto mt-20">
           <div className="grid grid-cols-1 gap-x-4 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
             {skills.map((skill, i) => {
               const tone = TONES[skill.tone];
