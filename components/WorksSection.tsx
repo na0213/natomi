@@ -22,8 +22,8 @@ interface WorkItem {
 const works: WorkItem[] = [
   {
     id: '1',
-    title: 'ウェルフェアFARM',
-    description: '福祉と農をつなぐ活動を、やさしい余白と動きで伝える自主制作サイト。',
+    title: 'FARM360',
+    description: '牧場を訪ね、見たこと、知ったことを伝える自主制作サイト',
     category: 'WEBサイト',
     type: 'site',
     videoSrc: '/works/1/work1.mp4',
