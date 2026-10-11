@@ -51,7 +51,7 @@ export default function WorkPage1() {
           '色味や余白を大切にし、落ち着いたトーンで安心感を演出しています',
         ],
       }}
-      tech={{ title: '使用言語 / 技術', items: ['PHP（Laravel）', 'HTML', 'CSS', 'JavaScript', 'AWS S3（画像ストレージ）'] }}
+      tech={{ title: '使用言語 / 技術', items: ['PHP（Laravel）', 'HTML', 'CSS', 'JavaScript', 'Heroku（サーバー・移行前）', 'AWS S3（画像ストレージ・移行前）', 'Cloudflare Workers（静的配信・2026年に移行）'] }}
     />
   );
 }
