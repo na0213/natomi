@@ -59,7 +59,7 @@ export default function Footer() {
         <div className="border-t border-gray-300 mt-8 pt-6">
           <div className="w-full text-center">
             <p className="text-gray-500 text-[11px] sm:text-xs md:text-sm">
-              © {currentYear} natomi. All rights reserved.
+              © {currentYear} enumaru. All rights reserved.
             </p>
           </div>
         </div>

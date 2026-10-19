@@ -177,7 +177,9 @@ export default function AboutSection() {
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <p className="mb-2 text-xs font-bold tracking-[0.18em] text-[#08aeb8]">WEB ENGINEER / WRITER</p>
-                  <h3 className="text-2xl font-bold text-[#243033] mb-4">Natomi</h3>
+                  <h3 className="text-2xl font-bold text-[#243033] mb-4">
+                    N。<span className="ml-0.5 text-sm font-normal text-gray-700">えぬまる</span>
+                  </h3>
                   <div className="space-y-4 text-gray-700">
                     <p>
                     小さい頃から動物が大好きで、大学では海洋学を専攻し、クジラや{' '}
