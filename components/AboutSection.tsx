@@ -101,7 +101,7 @@ export default function AboutSection() {
 
   const timelineItems = useMemo(() => toTimelineItems(TIMELINE_ITEMS), []);
   const cards = [
-    { title: 'Animal',  modal: '動物のいる暮らしが好きです。イヌ、ネコ、イルカ、ペンギン、ナマケモノなどなど、動物はだいたい好きです。', img: '/about/ferret.png' },
+    { title: 'Animals', modal: '動物のいる暮らしが好きです。イヌ、ネコ、イルカ、ペンギン、ナマケモノなどなど、動物はだいたい好きです。', img: '/about/ferret.png' },
     { title: 'Running', modal: '時間があると川沿いを走ります。トレイルランニングで色々な山も走っています。', img: '/about/run.png' },
     { title: 'Travel',  modal: '地域の魅力を知る旅がすき。温泉やオーベルジュにこだわりのある宿探しをしています。', img: '/about/trip.png' },
     { title: 'Fishing', modal: '主に海釣り。アジからタイや本ガツオまで。魚は自分で捌いていただいています。', img: '/about/fish.png' },

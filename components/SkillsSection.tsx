@@ -66,7 +66,7 @@ export default function SkillsSection() {
       art: 'genai',
       actor: 'penguin',
       tone: 'pink',
-      description: '文章・画像・動画制作と、制作フローの効率化への生成AIの導入。生成AIパスポート取得。',
+      description: 'Codex・Claude・Geminiなどを使い分け、開発や文章・画像・動画制作、制作フローの効率化に活用。生成AIパスポート取得。',
     },
     {
       id: 'visual',
@@ -110,7 +110,7 @@ export default function SkillsSection() {
           <p className="mb-3 text-xs font-bold tracking-[0.22em] text-[#08aeb8]">SKILLS</p>
           <h2 className="text-3xl text-[#243033]">
             <span className={styles.mark}>
-              できること
+              けいけん
               <svg viewBox="0 0 170 12" preserveAspectRatio="none" aria-hidden="true">
                 <path d="M 4 7 C 30 1 60 11 90 5 S 140 8 166 4" pathLength={1} />
               </svg>

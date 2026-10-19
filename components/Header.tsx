@@ -15,7 +15,6 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'works', label: 'Works' },
-    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavigate = (id: string) => {

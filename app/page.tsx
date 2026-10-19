@@ -6,7 +6,6 @@ import TopSection from '@/components/TopSection';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import WorksSection from '@/components/WorksSection';
-import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 
@@ -25,7 +24,7 @@ export default function Home() {
     }
 
     const handleScroll = () => {
-      const sections = ['top', 'about', 'skills', 'works', 'contact'];
+      const sections = ['top', 'about', 'skills', 'works'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -97,7 +96,7 @@ export default function Home() {
         <AboutSection />
         <SkillsSection />
         <WorksSection />
-        <ContactSection />
+        {/* れんらく（ContactSection）は一旦非表示 */}
       </main>
       <ScrollToTop />
       <Footer />
