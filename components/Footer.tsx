@@ -24,8 +24,8 @@ export default function Footer() {
               </a>
             </div>
             <p className="text-[#696969] mb-4 leading-relaxed">
-              最近は生成AIをつかいながら日々開発を楽しんでいます。<br />
-              インタビューライターで培ったコミュニケーション力でお手伝いします。
+              AIを相棒に、わくわくするものをコツコツつくっています。<br />
+              大好きな人や動物たちと、楽しく暮らしていくのが目標です。
             </p>
           </div>
 
