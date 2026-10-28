@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
 import WorkCard, { type WorkCardItem } from './WorkCard';
 
 interface WorkItem {
@@ -144,19 +143,11 @@ export default function WorksSection() {
           {filteredWorks.map((work) =>
             work.ratio ? <WorkCard key={work.id} work={{ ...work, ratio: work.ratio }} /> : null
           )}
+        </div>
 
-          <div className="flex min-h-[420px] flex-col justify-between border border-dashed border-[#9bd9dc] bg-white/70 p-8">
-            <div>
-              <div className="mb-8 flex h-12 w-12 items-center justify-center bg-[#e6fafa] text-[#08aeb8]">
-                <Plus className="h-6 w-6" aria-hidden="true" />
-              </div>
-              <p className="text-xs font-bold tracking-[0.28em] text-[#08aeb8]">COMING NEXT</p>
-              <h3 className="mt-4 text-2xl font-semibold text-[#243033]">随時追加予定</h3>
-              <p className="mt-5 text-sm leading-8 text-[#5d686b]">
-                つくったものを、ここに少しずつ増やしていきます。
-              </p>
-            </div>
-          </div>
+        <div className="mx-auto mt-14 max-w-3xl text-center">
+          <p className="text-xs font-bold tracking-[0.28em] text-[#08aeb8]">COMING NEXT</p>
+          <h3 className="mt-3 text-base font-semibold text-[#243033]">随時追加予定</h3>
         </div>
       </div>
     </section>
