@@ -29,20 +29,12 @@ export default function SkillsSection() {
     description: string;
   }[] = [
     {
-      id: 'frontend',
-      name: 'フロントエンド実装',
-      art: 'frontend',
+      id: 'web',
+      name: 'Web開発',
+      art: 'web',
       actor: 'cat',
       tone: 'green',
-      description: 'HTML/CSS、JavaScript、React / Next.jsによる、見た目と使いやすさを両立したUI実装。',
-    },
-    {
-      id: 'backend',
-      name: 'Webアプリ開発',
-      art: 'webapp',
-      actor: 'dog',
-      tone: 'yellow',
-      description: 'PHP / Laravel、API連携、フォーム送信、データ処理など、個人開発アプリの土台づくり。',
+      description: 'HTML/CSS、JavaScript、React / Next.js、PHP / Laravelで、見た目と使いやすさを両立したサイト・アプリづくり。',
     },
     {
       id: 'aws',
@@ -53,6 +45,14 @@ export default function SkillsSection() {
       description: 'Lambda / CloudFront / Route 53 / API Gateway / S3を用いたサーバレス構成、EC2での簡易構築など。',
     },
     {
+      id: 'genai',
+      name: '生成AI活用',
+      art: 'genai',
+      actor: 'penguin',
+      tone: 'pink',
+      description: 'Codex・Claude・Geminiなどを使い分け、開発や文章・画像・動画制作、制作フローの効率化に活用。',
+    },
+    {
       id: 'writing',
       name: '取材・ライティング',
       art: 'writing',
@@ -61,20 +61,20 @@ export default function SkillsSection() {
       description: 'インタビュー記事や広報コンテンツの執筆。伝えるべき魅力を整理し、言葉に。',
     },
     {
-      id: 'genai',
-      name: '生成AI活用',
-      art: 'genai',
-      actor: 'penguin',
-      tone: 'pink',
-      description: 'Codex・Claude・Geminiなどを使い分け、開発や文章・画像・動画制作、制作フローの効率化に活用。生成AIパスポート取得。',
+      id: 'quality',
+      name: '品質管理',
+      art: 'quality',
+      actor: 'dog',
+      tone: 'green',
+      description: '化粧品・健康食品・日用品メーカーでの品質管理。景表法など、表示に関わるルールの基礎も学習。',
     },
     {
-      id: 'visual',
-      name: '3D / WebARの学習',
-      art: 'ar',
+      id: 'logistics',
+      name: '受発注・物流管理',
+      art: 'logistics',
       actor: 'dolphin',
-      tone: 'green',
-      description: 'Blenderの基礎を学びつつ、Rodinで作ったモデルのWebAR表現を探求中。',
+      tone: 'blue',
+      description: '化粧品・健康食品・日用品の受発注と、物流の管理・改善。',
     },
   ];
 

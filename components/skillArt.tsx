@@ -7,7 +7,7 @@ import { ACTORS, COLORS, SPRITE_BOX, type ActorId } from './heroActors';
 
 /* 「できること」の線画：スキルごとのアイコンと、カードの上からのぞく動物 */
 
-export type SkillIconId = 'frontend' | 'webapp' | 'aws' | 'writing' | 'genai' | 'ar';
+export type SkillIconId = 'web' | 'aws' | 'writing' | 'genai' | 'quality' | 'logistics';
 
 type IconDef = { strokes: string[]; fills: { d: string; c: string }[] };
 
@@ -18,17 +18,21 @@ const star = (x: number, y: number, r: number) =>
   `M ${x} ${y - r} Q ${x} ${y} ${x + r} ${y} Q ${x} ${y} ${x} ${y + r} Q ${x} ${y} ${x - r} ${y} Q ${x} ${y} ${x} ${y - r} Z`;
 
 const WINDOW = 'M 10 10 H 54 Q 58 10 58 14 V 50 Q 58 54 54 54 H 10 Q 6 54 6 50 V 14 Q 6 10 10 10 Z';
-const DB_BODY = 'M 6 14 V 44 C 6 49 36 49 36 44 V 14 C 36 9 6 9 6 14 Z';
 const CLOUD = 'M 16 46 C 6 46 4 32 14 30 C 13 18 30 13 35 23 C 40 16 54 20 52 32 C 62 33 61 46 50 46 Z';
 const BOLT = 'M 35 24 L 26 38 L 32 38 L 29 51 L 40 35 L 34 35 L 38 24 Z';
 const NOTE = 'M 12 8 H 42 Q 45 8 45 11 V 53 Q 45 56 42 56 H 12 Q 9 56 9 53 V 11 Q 9 8 12 8 Z';
 const PENCIL = 'M 34 52 L 36 43 L 52 27 L 58 33 L 42 49 Z';
 const ERASER = 'M 52 27 L 55 24 Q 57 22 60 25 Q 62 28 60 30 L 58 33 Z';
 const HEAD = 'M 18 22 H 40 Q 46 22 46 28 V 46 Q 46 52 40 52 H 18 Q 12 52 12 46 V 28 Q 12 22 18 22 Z';
+const BOTTLE = 'M 16 17 H 24 V 21 Q 32 23 32 31 V 52 Q 32 56 28 56 H 12 Q 8 56 8 52 V 31 Q 8 23 16 21 Z';
+const LENS = circ(44, 34, 11);
+const CARGO = box(4, 16, 38, 44);
+const CAB = 'M 38 24 H 49 Q 51 24 52.5 26 L 59 34.5 Q 60 36 60 38 V 44 H 38 Z';
+const CAB_WINDOW = 'M 42 28 H 48.5 L 54 35 H 42 Z';
 
 const ICONS: Record<SkillIconId, IconDef> = {
-  // フロントエンド実装：画面と、クリックするカーソル
-  frontend: {
+  // Web開発：画面と、クリックするカーソル
+  web: {
     strokes: [
       WINDOW,
       'M 6 21 H 58',
@@ -47,19 +51,6 @@ const ICONS: Record<SkillIconId, IconDef> = {
       { d: box(26, 35, 38, 49), c: 'white' },
       { d: 'M 44 40 L 44 57 L 48.5 53 L 52 60 L 55.5 58.5 L 52 51.5 L 58 51 Z', c: 'white' },
     ],
-  },
-  // Webアプリ開発：データベースと、コード
-  webapp: {
-    strokes: [
-      'M 6 14 a 15 5 0 1 0 30 0 a 15 5 0 1 0 -30 0 Z',
-      'M 6 14 V 44 C 6 49 36 49 36 44 V 14',
-      'M 6 24 C 6 29 36 29 36 24',
-      'M 6 34 C 6 39 36 39 36 34',
-      'M 46 22 L 40 32 L 46 42',
-      'M 56 22 L 62 32 L 56 42',
-      'M 53 20 L 49 44',
-    ],
-    fills: [{ d: DB_BODY, c: 'yellow' }],
   },
   // AWS / サーバレス：雲と、いなずま
   aws: {
@@ -113,21 +104,41 @@ const ICONS: Record<SkillIconId, IconDef> = {
       { d: star(58, 29, 4), c: 'yellow' },
     ],
   },
-  // 3D / WebARの学習：立方体と、ARのファインダー
-  ar: {
+  // 品質管理：化粧品のボトルと、チェックする虫めがね
+  quality: {
     strokes: [
-      'M 32 12 L 50 21 L 32 30 L 14 21 Z',
-      'M 14 21 L 32 30 L 32 52 L 14 43 Z',
-      'M 32 30 L 50 21 L 50 43 L 32 52 Z',
-      'M 4 12 V 5 H 11',
-      'M 53 5 H 60 V 12',
-      'M 60 52 V 59 H 53',
-      'M 11 59 H 4 V 52',
+      box(14, 9, 26, 17),
+      BOTTLE,
+      box(12, 35, 28, 47),
+      LENS,
+      'M 38.5 34.5 L 42.5 38.5 L 49.5 29.5',
+      'M 52 42 L 60 50',
     ],
     fills: [
-      { d: 'M 32 12 L 50 21 L 32 30 L 14 21 Z', c: 'green' },
-      { d: 'M 14 21 L 32 30 L 32 52 L 14 43 Z', c: 'blue' },
-      { d: 'M 32 30 L 50 21 L 50 43 L 32 52 Z', c: 'pink' },
+      { d: box(14, 9, 26, 17), c: 'blue' },
+      { d: BOTTLE, c: 'pink' },
+      { d: box(12, 35, 28, 47), c: 'cream' },
+      { d: LENS, c: 'white' },
+    ],
+  },
+  // 受発注・物流管理：荷物をはこぶトラック
+  logistics: {
+    strokes: [
+      CARGO,
+      box(14, 22, 28, 37),
+      'M 21 22 V 28',
+      CAB,
+      CAB_WINDOW,
+      circ(15, 49, 5),
+      circ(49, 49, 5),
+    ],
+    fills: [
+      { d: CARGO, c: 'yellow' },
+      { d: box(14, 22, 28, 37), c: 'peach' },
+      { d: CAB, c: 'blue' },
+      { d: CAB_WINDOW, c: 'white' },
+      { d: circ(15, 49, 5), c: 'white' },
+      { d: circ(49, 49, 5), c: 'white' },
     ],
   },
 };
