@@ -58,7 +58,7 @@ export default function SkillsSection() {
       art: 'writing',
       actor: 'sloth',
       tone: 'yellow',
-      description: 'インタビュー記事や広報コンテンツの執筆。伝えるべき魅力を整理し、言葉に。',
+      description: 'インタビュー記事や広報コンテンツの執筆。取材から構成・原稿作成まで担当。',
     },
     {
       id: 'quality',
